@@ -42,9 +42,9 @@ spec:
         showResponseTime: true
     
     flightOps:
-      enabled: true
+      enabled: false
       refreshInterval: 300000 # 5 minutes
-      mockData: true # Cambiar a false cuando tengas API real
+      mockData: false
       endpoints:
         healthCheck: "https://api.ba.com/flight-ops/v1/health"
         metrics: "https://api.ba.com/flight-ops/v1/metrics"
@@ -57,9 +57,9 @@ spec:
         - passengerCapacity
     
     costDashboard:
-      enabled: true
+      enabled: false
       refreshInterval: 900000 # 15 minutes
-      mockData: true
+      mockData: false
       cloudProviders:
         - name: aws
           region: eu-west-1
@@ -75,9 +75,9 @@ spec:
         notificationChannels: ["slack", "email"]
     
     security:
-      enabled: true
+      enabled: false
       refreshInterval: 60000 # 1 minute
-      mockData: true
+      mockData: false
       alertSources:
         - name: "Snyk"
           endpoint: "https://security.ba.com/snyk/alerts"
@@ -97,9 +97,9 @@ spec:
         showTrends: true
     
     systemHealth:
-      enabled: true
+      enabled: false
       refreshInterval: 30000 # 30 seconds
-      mockData: true
+      mockData: false
       services:
         - name: "API Gateway"
           endpoint: "https://api-gateway.ba.com/health"
