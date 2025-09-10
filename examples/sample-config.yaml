@@ -1,0 +1,57 @@
+# Sample Dashboard Configuration
+# This is a minimal example showing the basic structure
+
+apiVersion: backstage.io/v1
+kind: DashboardConfig
+metadata:
+  name: sample-dashboard
+  title: "Sample Dashboard"
+  subtitle: "Example configuration for reference"
+  version: "1.0.0"
+
+spec:
+  widgets:
+    github:
+      enabled: true
+      refreshInterval: 300000
+      repositories:
+        - "your-org/your-repo"
+      maxEvents: 5
+    
+    catalog:
+      enabled: true
+      refreshInterval: 120000
+      maxServices: 6
+      filters:
+        kinds: ["Component", "API"]
+    
+    worldClock:
+      enabled: true
+      refreshInterval: 1000
+      timezones:
+        - name: "London"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+        - name: "New York"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+
+  layout:
+    grid:
+      columns: 12
+      spacing: 2
+    positions:
+      github:
+        xs: 12
+        md: 6
+      catalog:
+        xs: 12
+        md: 6
+      worldClock:
+        xs: 12
+
+  theme:
+    primaryColor: "#1976d2"
+    backgroundColor: "#f5f5f5"
+    cardElevation: 1
+    borderRadius: 4

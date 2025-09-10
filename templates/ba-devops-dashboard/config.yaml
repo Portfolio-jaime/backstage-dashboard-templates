@@ -1,0 +1,235 @@
+# BA DevOps Dashboard Configuration
+apiVersion: backstage.io/v1
+kind: DashboardConfig
+metadata:
+  name: ba-devops-dashboard
+  title: "BA DevOps Command Center"
+  subtitle: "British Airways Developer Portal - Real-time Operations Dashboard"
+  version: "1.0.0"
+  namespace: ba-devops
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/Portfolio-jaime/backstage-dashboard-templates/blob/main/templates/ba-devops-dashboard/config.yaml
+    backstage.io/created-by: jaime.henao@ba.com
+    backstage.io/last-updated: "2025-01-15T10:30:00Z"
+
+spec:
+  widgets:
+    github:
+      enabled: true
+      refreshInterval: 300000 # 5 minutes
+      repositories:
+        - "Portfolio-jaime/backstage-solutions"
+        - "Portfolio-jaime/Go-app-1"
+        - "Portfolio-jaime/python-app-20"
+        - "Portfolio-jaime/cli-go-11"
+        - "Portfolio-jaime/gitops"
+        - "Portfolio-jaime/terra-test-terraform-module"
+        - "Portfolio-jaime/vpc-terraform-module"
+      maxEvents: 8
+      apiConfig:
+        usePublicApi: true
+        rateLimit: 5000 # requests per hour
+    
+    catalog:
+      enabled: true
+      refreshInterval: 120000 # 2 minutes
+      maxServices: 8
+      filters:
+        kinds: ["Component", "API", "Resource"]
+      displayOptions:
+        showHealthMetrics: true
+        showUptime: true
+        showResponseTime: true
+    
+    flightOps:
+      enabled: true
+      refreshInterval: 300000 # 5 minutes
+      mockData: true # Cambiar a false cuando tengas API real
+      endpoints:
+        healthCheck: "https://api.ba.com/flight-ops/v1/health"
+        metrics: "https://api.ba.com/flight-ops/v1/metrics"
+        realTimeData: "https://api.ba.com/flight-ops/v1/realtime"
+      displayMetrics:
+        - flightsOnTime
+        - delayedFlights
+        - cancelledFlights
+        - activeRoutes
+        - passengerCapacity
+    
+    costDashboard:
+      enabled: true
+      refreshInterval: 900000 # 15 minutes
+      mockData: true
+      cloudProviders:
+        - name: aws
+          region: eu-west-1
+          costApi: "https://cost-api.ba.com/aws"
+        - name: azure
+          region: uksouth
+          costApi: "https://cost-api.ba.com/azure"
+        - name: gcp
+          region: europe-west2
+          costApi: "https://cost-api.ba.com/gcp"
+      budgetAlerts:
+        threshold: 80 # percentage
+        notificationChannels: ["slack", "email"]
+    
+    security:
+      enabled: true
+      refreshInterval: 60000 # 1 minute
+      mockData: true
+      alertSources:
+        - name: "Snyk"
+          endpoint: "https://security.ba.com/snyk/alerts"
+          severity: ["high", "critical"]
+        - name: "SonarQube"
+          endpoint: "https://security.ba.com/sonar/alerts"
+          severity: ["major", "blocker"]
+        - name: "Dependabot"
+          endpoint: "https://security.ba.com/dependabot/alerts"
+          severity: ["high", "critical"]
+        - name: "AWS Security Hub"
+          endpoint: "https://security.ba.com/aws-security/alerts"
+          severity: ["medium", "high", "critical"]
+      displayOptions:
+        maxAlerts: 10
+        autoRefresh: true
+        showTrends: true
+    
+    systemHealth:
+      enabled: true
+      refreshInterval: 30000 # 30 seconds
+      mockData: true
+      services:
+        - name: "API Gateway"
+          endpoint: "https://api-gateway.ba.com/health"
+          sla: 99.9
+          environment: "production"
+        - name: "Booking Service"
+          endpoint: "https://booking.ba.com/health"
+          sla: 99.5
+          environment: "production"
+        - name: "Customer DB"
+          endpoint: "https://db-proxy.ba.com/health"
+          sla: 99.8
+          environment: "production"
+        - name: "Flight Info"
+          endpoint: "https://flight-info.ba.com/health"
+          sla: 99.7
+          environment: "production"
+        - name: "Mobile App"
+          endpoint: "https://mobile-api.ba.com/health"
+          sla: 98.9
+          environment: "production"
+      healthMetrics:
+        overallThreshold: 90
+        warningThreshold: 95
+        criticalThreshold: 85
+    
+    worldClock:
+      enabled: true
+      refreshInterval: 1000 # 1 second
+      timezones:
+        - name: "London"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+          primary: true
+        - name: "New York"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+          primary: false
+        - name: "Hong Kong"
+          timezone: "Asia/Hong_Kong"
+          flag: "🇭🇰"
+          primary: false
+        - name: "Sydney"
+          timezone: "Australia/Sydney"
+          flag: "🇦🇺"
+          primary: false
+      displayOptions:
+        format24Hour: true
+        showSeconds: true
+        showDate: true
+
+  layout:
+    grid:
+      columns: 12
+      spacing: 3
+      responsive: true
+    positions:
+      search:
+        xs: 12
+        priority: 1
+      welcome:
+        xs: 12
+        md: 8
+        priority: 2
+      worldClock:
+        xs: 12
+        md: 4
+        priority: 3
+      flightOps:
+        xs: 12
+        lg: 8
+        priority: 4
+      security:
+        xs: 12
+        lg: 4
+        priority: 5
+      systemHealth:
+        xs: 12
+        priority: 6
+      costDashboard:
+        xs: 12
+        md: 8
+        priority: 7
+      teamActivity:
+        xs: 12
+        md: 4
+        priority: 8
+      catalog:
+        xs: 12
+        md: 6
+        priority: 9
+      quickActions:
+        xs: 12
+        md: 3
+        priority: 10
+      joke:
+        xs: 12
+        md: 3
+        priority: 11
+
+  theme:
+    primaryColor: "#1976d2"
+    secondaryColor: "#ff9800"
+    backgroundColor: "#f5f5f5"
+    surfaceColor: "#ffffff"
+    errorColor: "#f44336"
+    warningColor: "#ff9800"
+    successColor: "#4caf50"
+    cardElevation: 2
+    borderRadius: 8
+    fontFamily: "Roboto, sans-serif"
+
+  branding:
+    companyName: "British Airways"
+    companyLogo: "/static/ba-logo.png"
+    motto: "To fly. To serve. To code."
+    colors:
+      primary: "#1976d2"
+      accent: "#ff9800"
+
+  notifications:
+    enabled: true
+    channels:
+      slack:
+        webhook: "https://hooks.slack.com/services/..."
+        channel: "#ba-devops-alerts"
+      email:
+        smtp: "smtp.ba.com"
+        recipients: ["devops-team@ba.com"]
+    alertThresholds:
+      systemHealth: 85
+      costBudget: 80
+      securityAlerts: 1

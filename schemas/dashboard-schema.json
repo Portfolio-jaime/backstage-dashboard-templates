@@ -1,0 +1,312 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Portfolio-jaime/backstage-dashboard-templates/schemas/dashboard-schema.json",
+  "type": "object",
+  "title": "Backstage Dashboard Configuration Schema",
+  "description": "Schema for validating Backstage dashboard configurations",
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "const": "backstage.io/v1",
+      "description": "API version for the configuration"
+    },
+    "kind": {
+      "type": "string",
+      "const": "DashboardConfig",
+      "description": "Kind of configuration object"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Metadata about the dashboard configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique name for the dashboard"
+        },
+        "title": {
+          "type": "string",
+          "description": "Display title for the dashboard"
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Subtitle for the dashboard"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semantic version of the configuration"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace for the dashboard"
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Additional annotations"
+        }
+      },
+      "required": ["name", "title", "version"]
+    },
+    "spec": {
+      "type": "object",
+      "description": "Dashboard specification",
+      "properties": {
+        "widgets": {
+          "type": "object",
+          "description": "Widget configurations",
+          "properties": {
+            "github": {
+              "type": "object",
+              "properties": {
+                "enabled": { 
+                  "type": "boolean",
+                  "description": "Enable GitHub widget"
+                },
+                "refreshInterval": { 
+                  "type": "number",
+                  "minimum": 1000,
+                  "description": "Refresh interval in milliseconds"
+                },
+                "repositories": {
+                  "type": "array",
+                  "items": { 
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$"
+                  },
+                  "description": "List of repositories to monitor"
+                },
+                "maxEvents": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 20,
+                  "description": "Maximum number of events to display"
+                }
+              },
+              "required": ["enabled"]
+            },
+            "catalog": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "refreshInterval": { 
+                  "type": "number",
+                  "minimum": 1000
+                },
+                "maxServices": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 20
+                },
+                "filters": {
+                  "type": "object",
+                  "properties": {
+                    "kinds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": ["Component", "API", "Resource", "System", "Domain", "Location", "User", "Group"]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["enabled"]
+            },
+            "flightOps": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "refreshInterval": { "type": "number", "minimum": 1000 },
+                "mockData": { "type": "boolean" },
+                "endpoints": {
+                  "type": "object",
+                  "properties": {
+                    "healthCheck": { "type": "string", "format": "uri" },
+                    "metrics": { "type": "string", "format": "uri" }
+                  }
+                }
+              },
+              "required": ["enabled"]
+            },
+            "costDashboard": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "refreshInterval": { "type": "number", "minimum": 1000 },
+                "mockData": { "type": "boolean" },
+                "cloudProviders": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      { "type": "string", "enum": ["aws", "azure", "gcp"] },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "region": { "type": "string" },
+                          "costApi": { "type": "string", "format": "uri" }
+                        },
+                        "required": ["name"]
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["enabled"]
+            },
+            "security": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "refreshInterval": { "type": "number", "minimum": 1000 },
+                "mockData": { "type": "boolean" },
+                "alertSources": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      { "type": "string" },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "endpoint": { "type": "string", "format": "uri" },
+                          "severity": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": ["low", "medium", "high", "critical", "major", "blocker"]
+                            }
+                          }
+                        },
+                        "required": ["name"]
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["enabled"]
+            },
+            "systemHealth": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "refreshInterval": { "type": "number", "minimum": 1000 },
+                "mockData": { "type": "boolean" },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "endpoint": { "type": "string", "format": "uri" },
+                      "sla": { "type": "number", "minimum": 0, "maximum": 100 },
+                      "environment": { "type": "string" }
+                    },
+                    "required": ["name", "endpoint"]
+                  }
+                }
+              },
+              "required": ["enabled"]
+            },
+            "worldClock": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "refreshInterval": { "type": "number", "minimum": 1000 },
+                "timezones": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "timezone": { "type": "string" },
+                      "flag": { "type": "string" },
+                      "primary": { "type": "boolean" }
+                    },
+                    "required": ["name", "timezone"]
+                  }
+                }
+              },
+              "required": ["enabled"]
+            }
+          }
+        },
+        "layout": {
+          "type": "object",
+          "properties": {
+            "grid": {
+              "type": "object",
+              "properties": {
+                "columns": { 
+                  "type": "number", 
+                  "minimum": 1, 
+                  "maximum": 24 
+                },
+                "spacing": { 
+                  "type": "number", 
+                  "minimum": 0, 
+                  "maximum": 10 
+                },
+                "responsive": { "type": "boolean" }
+              },
+              "required": ["columns"]
+            },
+            "positions": {
+              "type": "object",
+              "patternProperties": {
+                "^[a-zA-Z]+$": {
+                  "type": "object",
+                  "properties": {
+                    "xs": { "type": "number", "minimum": 1, "maximum": 12 },
+                    "sm": { "type": "number", "minimum": 1, "maximum": 12 },
+                    "md": { "type": "number", "minimum": 1, "maximum": 12 },
+                    "lg": { "type": "number", "minimum": 1, "maximum": 12 },
+                    "xl": { "type": "number", "minimum": 1, "maximum": 12 },
+                    "priority": { "type": "number", "minimum": 1 }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "theme": {
+          "type": "object",
+          "properties": {
+            "primaryColor": { 
+              "type": "string", 
+              "pattern": "^#[0-9a-fA-F]{6}$" 
+            },
+            "secondaryColor": { 
+              "type": "string", 
+              "pattern": "^#[0-9a-fA-F]{6}$" 
+            },
+            "backgroundColor": { 
+              "type": "string", 
+              "pattern": "^#[0-9a-fA-F]{6}$" 
+            },
+            "cardElevation": { 
+              "type": "number", 
+              "minimum": 0, 
+              "maximum": 24 
+            },
+            "borderRadius": { 
+              "type": "number", 
+              "minimum": 0 
+            }
+          }
+        },
+        "branding": {
+          "type": "object",
+          "properties": {
+            "companyName": { "type": "string" },
+            "companyLogo": { "type": "string" },
+            "motto": { "type": "string" }
+          }
+        }
+      },
+      "required": ["widgets", "layout"]
+    }
+  },
+  "required": ["apiVersion", "kind", "metadata", "spec"]
+}
