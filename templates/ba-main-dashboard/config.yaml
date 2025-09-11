@@ -1,0 +1,155 @@
+apiVersion: backstage.io/v1beta1
+kind: DashboardConfig
+metadata:
+  name: ba-main-dashboard
+  title: British Airways - Operations Overview
+  subtitle: Central hub for all BA digital operations
+  version: "1.0.0"
+  author: "British Airways Digital Operations"
+  
+spec:
+  widgets:
+    # Overview widgets - general information
+    catalog:
+      enabled: true
+      refreshInterval: 120000
+      maxServices: 20
+      title: "BA Services Overview"
+      showOverview: true
+      filters:
+        # General filters to show all types
+        tags: ["production", "critical", "service", "api", "platform", "security"]
+        kinds: ["Component", "API", "Resource", "System"]
+        types: ["service", "library", "tool", "infrastructure", "api"]
+        labels:
+          - "ba.com/critical"
+          - "ba.com/production"
+      displayOptions:
+        showOverview: true
+        showMetrics: true
+        showHealthStatus: true
+        showByCategory: true
+        
+    systemHealth:
+      enabled: true
+      refreshInterval: 30000
+      title: "BA Systems Health Overview"
+      showOverview: true
+      
+    github:
+      enabled: true
+      refreshInterval: 600000
+      maxEvents: 6
+      title: "BA Digital Projects Overview"
+      dynamicRepos: true
+      owner: "Portfolio-jaime" 
+      showOverview: true
+      filters:
+        keywords: ["backstage", "ba", "british-airways", "aviation"]
+        topics: ["backstage", "aviation", "platform"]
+        exclude: ["archived", "private", "test", "demo"]
+        sortBy: "updated"
+        maxRepos: 5
+        
+    worldClock:
+      enabled: true
+      refreshInterval: 1000
+      title: "BA Global Operations"
+      timezones:
+        - name: "London HQ"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+        - name: "Madrid Hub"
+          timezone: "Europe/Madrid"
+          flag: "🇪🇸"
+        - name: "New York"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+        - name: "Singapore"
+          timezone: "Asia/Singapore"
+          flag: "🇸🇬"
+        - name: "Mumbai"
+          timezone: "Asia/Kolkata"
+          flag: "🇮🇳"
+          
+    # Disabled simulated widgets - Main dashboard focuses on real information only
+    flightOps:
+      enabled: false
+      reason: "No real flight operations API available - simulated data removed"
+      
+    costDashboard:
+      enabled: false
+      reason: "No real cost management API available - use Management dashboard"
+      
+    security:
+      enabled: false
+      reason: "Use dedicated Security dashboard for security information"
+      
+  layout:
+    grid:
+      columns: 12
+      spacing: 3
+    positions:
+      search: { xs: 12 }
+      welcome: { xs: 12, md: 8 }
+      worldClock: { xs: 12, md: 4 }
+      systemHealth: { xs: 12 }
+      catalog: { xs: 12, md: 8 }
+      github: { xs: 12, md: 4 }
+      
+  theme:
+    primaryColor: "#1976d2"      # BA Blue
+    secondaryColor: "#dc004e"    # BA Red
+    backgroundColor: "#f8f9fa"
+    cardElevation: 2
+    borderRadius: 8
+    
+  branding:
+    companyName: "British Airways Digital Operations"
+    companyLogo: "/ba-logo.png"
+    motto: "To fly. To serve. To innovate."
+    
+  navigation:
+    showDashboardCards: true
+    deriveDashboards: true
+    quickAccess:
+      - id: "ba-devops"
+        name: "DevOps Operations"
+        icon: "🚀"
+        description: "CI/CD, deployments, and automation"
+        category: "Operations"
+        
+      - id: "ba-platform"
+        name: "Platform Engineering" 
+        icon: "⚙️"
+        description: "Infrastructure and platform services"
+        category: "Engineering"
+        
+      - id: "ba-security"
+        name: "Security Operations"
+        icon: "🔒"
+        description: "Security monitoring and compliance"
+        category: "Security"
+        
+      - id: "ba-management"
+        name: "Executive Overview"
+        icon: "📊"
+        description: "Business metrics and strategic overview"
+        category: "Management"
+        
+      - id: "ba-developer"
+        name: "Developer Experience"
+        icon: "💻"
+        description: "Development tools and productivity"
+        category: "Development"
+        
+  notifications:
+    enabled: true
+    channels:
+      - slack
+      - email
+    alertTypes:
+      - critical_system
+      - security_alert
+      - cost_anomaly
+      - deployment_failure
