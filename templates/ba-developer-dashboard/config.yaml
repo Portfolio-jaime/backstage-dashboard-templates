@@ -48,24 +48,6 @@ spec:
       showPRs: true
       showIssues: true
       showTemplates: true
-      
-    worldClock:
-      enabled: true
-      refreshInterval: 1000
-      title: "Developer Teams Worldwide"
-      timezones:
-        - name: "London Dev"
-          timezone: "Europe/London"
-          flag: "🇬🇧"
-        - name: "Krakow Dev"
-          timezone: "Europe/Warsaw"
-          flag: "🇵🇱"
-        - name: "Mumbai Dev"
-          timezone: "Asia/Kolkata"
-          flag: "🇮🇳"
-        - name: "Remote Dev"
-          timezone: "America/New_York"
-          flag: "🏠"
           
     # Disabled simulated widgets - Developer dashboard focuses on real tools
     systemHealth:
