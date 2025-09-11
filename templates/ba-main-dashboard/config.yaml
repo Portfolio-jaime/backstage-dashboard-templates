@@ -117,6 +117,56 @@ spec:
     companyName: "British Airways Digital Operations"
     companyLogo: "/ba-logo.png"
     motto: "To fly. To serve. To innovate."
+
+  content:
+    welcome:
+      title: "Welcome to British Airways Digital Operations Hub!"
+      message: |
+        Welcome to British Airways Digital Operations Hub! ✈️
+        
+        Your central command center for monitoring and managing all BA digital infrastructure and services worldwide.
+        
+        🎯 SPECIALIZED DASHBOARDS
+        Navigate to the dashboard that matches your role using the cards below:
+        
+        🚀 Operations - DevOps, deployments, and system automation
+        ⚙️ Engineering - Platform infrastructure and cloud services  
+        🔒 Security - Security monitoring and compliance oversight
+        📊 Management - Strategic metrics and business insights
+        💻 Development - Developer tools and productivity metrics
+        
+        📊 SYSTEM OVERVIEW
+        • Real-time system health monitoring
+        • Complete service catalog with live status
+        • Global operations timezones
+        • GitHub activity and project updates
+        • Quick access to essential tools
+        
+        🌍 GLOBAL REACH
+        BA operates across multiple time zones and continents. Use the world clock to coordinate with teams in London, Madrid, New York, Singapore, Mumbai, and more.
+        
+        ✈️ Ready for takeoff? Select your dashboard above and start monitoring BA's digital excellence.
+        
+        ---
+        "Connecting the world through digital innovation" - BA Operations Team
+
+    quickActions:
+      - title: "Service Catalog"
+        icon: "📊"
+        url: "/catalog"
+        description: "Browse all services"
+      - title: "Documentation"
+        icon: "📚"
+        url: "/docs"
+        description: "Technical documentation"
+      - title: "Global Search"
+        icon: "🔍"
+        url: "/search"
+        description: "Search everything"
+      - title: "Settings"
+        icon: "⚙️"
+        url: "/settings"
+        description: "User preferences"
     
   navigation:
     showDashboardCards: true
