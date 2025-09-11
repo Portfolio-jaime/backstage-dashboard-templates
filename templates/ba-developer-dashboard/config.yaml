@@ -14,27 +14,40 @@ spec:
       enabled: true
       refreshInterval: 120000
       maxServices: 15
-      title: "Developer Services & APIs"
+      title: "APIs, Services & Templates"
       developerView: true
-      showTemplates: true
-      showAPIs: true
+      filters:
+        tags: ["api", "service", "template", "library", "tool", "sdk", "framework"]
+        kinds: ["Component", "API", "Template", "Resource"]
+        types: ["service", "library", "tool", "template", "api"]
+        labels:
+          - "developer.ba.com/tool"
+          - "api.ba.com/public"
+      displayOptions:
+        showAPIs: true
+        showTemplates: true
+        showDevelopmentTools: true
+        showDocumentation: true
+        hideInfrastructure: true
       
     github:
       enabled: true
       refreshInterval: 180000
       maxEvents: 15
-      title: "Development Activity"
+      title: "Developer Tools & Templates"
       dynamicRepos: true
       owner: "Portfolio-jaime"
       filters:
-        keywords: ["api", "app", "service", "tool", "template", "go", "python"]
-        topics: ["api", "microservice", "backend", "frontend", "development"]
-        exclude: ["archived", "private"]
+        keywords: ["api", "app", "service", "tool", "template", "go", "python", "sdk", "cli", "library", "framework"]
+        topics: ["api", "microservice", "backend", "frontend", "development", "sdk", "cli-tool", "template", "boilerplate"]
+        exclude: ["archived", "private", "infrastructure"]
         sortBy: "updated"
         maxRepos: 12
+        developerFocused: true
       developerView: true
       showPRs: true
       showIssues: true
+      showTemplates: true
       
     worldClock:
       enabled: true

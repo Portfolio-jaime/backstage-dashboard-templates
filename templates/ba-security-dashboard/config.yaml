@@ -33,7 +33,18 @@ spec:
       maxServices: 8
       title: "Security-Critical Services"
       securityFocus: true
-      filterByTag: "security-critical"
+      filters:
+        tags: ["security", "compliance", "auth", "encryption", "monitoring", "audit"]
+        kinds: ["Component", "API", "Resource"]
+        types: ["service", "library", "tool"]
+        labels:
+          - "security.ba.com/critical"
+          - "compliance.ba.com/required"
+      displayOptions:
+        showSecurityMetrics: true
+        showComplianceStatus: true
+        showVulnerabilities: true
+        hideNonSecurityServices: true
       
     worldClock:
       enabled: true
@@ -62,11 +73,12 @@ spec:
       dynamicRepos: true
       owner: "Portfolio-jaime"
       filters:
-        keywords: ["security", "compliance", "audit", "scan", "vulnerability"]
-        topics: ["security", "compliance", "scanning", "monitoring"]
+        keywords: ["security", "compliance", "audit", "scan", "vulnerability", "cve", "sast", "dast", "secrets", "auth"]
+        topics: ["security", "compliance", "scanning", "monitoring", "vulnerability-scanner", "security-tools"]
         exclude: ["archived", "private"]
         sortBy: "updated"
         maxRepos: 6
+        securityFocused: true
         
     # Disabled non-security widgets
     flightOps:

@@ -19,7 +19,19 @@ spec:
       enabled: true
       refreshInterval: 120000
       maxServices: 12
-      title: "Platform Services"
+      title: "Infrastructure & Platform Services"
+      filters:
+        tags: ["infrastructure", "platform", "kubernetes", "monitoring", "networking", "storage"]
+        kinds: ["Component", "API", "Resource", "System"]
+        types: ["service", "library", "tool", "infrastructure"]
+        labels:
+          - "platform.ba.com/managed"
+          - "infrastructure.ba.com/critical"
+      displayOptions:
+        showPlatformMetrics: true
+        showResourceUsage: true
+        showHealthStatus: true
+        hideApplicationServices: true
       
     worldClock:
       enabled: true
@@ -44,15 +56,16 @@ spec:
       enabled: true
       refreshInterval: 300000
       maxEvents: 12
-      title: "Platform Repositories Activity"
+      title: "Infrastructure & Platform Activity"
       dynamicRepos: true
       owner: "Portfolio-jaime"
       filters:
-        keywords: ["k8s", "cluster", "terraform", "infrastructure", "platform", "helm"]
-        topics: ["kubernetes", "terraform", "infrastructure", "platform", "helm", "devops"]
+        keywords: ["k8s", "cluster", "terraform", "infrastructure", "platform", "helm", "crossplane", "argocd", "istio", "monitoring"]
+        topics: ["kubernetes", "terraform", "infrastructure", "platform", "helm", "devops", "cloud-native", "gitops"]
         exclude: ["archived", "private"]
         sortBy: "updated"
         maxRepos: 10
+        platformFocused: true
         
     # Disabled simulated widgets - Platform dashboard focuses on real infrastructure
     flightOps:
