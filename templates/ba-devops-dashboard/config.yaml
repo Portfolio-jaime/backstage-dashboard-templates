@@ -4,7 +4,7 @@ kind: DashboardConfig
 metadata:
   name: ba-devops-dashboard
   title: "BA DevOps Command Center"
-  subtitle: "British Airways Developer Portal - Real-time Operations Dashboard"
+  subtitle: "Development operations and deployment monitoring"
   version: "1.0.0"
   namespace: ba-devops
   annotations:
@@ -163,10 +163,60 @@ spec:
   branding:
     companyName: "British Airways"
     companyLogo: "/static/ba-logo.png"
-    motto: "To fly. To serve. To code."
+    motto: "To fly. To serve. To deploy."
     colors:
       primary: "#1976d2"
       accent: "#ff9800"
+
+  content:
+    welcome:
+      title: "Welcome to BA DevOps Command Center!"
+      message: |
+        🚀 Welcome to BA DevOps Command Center!
+        
+        Your mission control for all development operations and deployments across BA's digital infrastructure.
+        
+        🔄 CONTINUOUS OPERATIONS
+        • Monitor CI/CD pipelines and deployment status
+        • Track system health and performance metrics
+        • Automate infrastructure provisioning and scaling
+        • Ensure high availability across all environments
+        
+        🛠️ DEVOPS TOOLKIT
+        • GitHub repositories and code activity
+        • System health monitoring and alerts  
+        • Service catalog with deployment status
+        • Global time coordination for releases
+        
+        🎯 KEY RESPONSIBILITIES
+        • Deployment orchestration and rollbacks
+        • Infrastructure as Code management
+        • Monitoring and observability setup
+        • Incident response and recovery procedures
+        
+        ⚡ OPERATIONAL EXCELLENCE
+        Ready to deploy with confidence? Monitor your pipelines, track deployments, and ensure BA's digital services fly smoothly around the globe.
+        
+        ---
+        "To fly. To serve. To deploy." - BA DevOps Team
+
+    quickActions:
+      - title: "Deploy Service"
+        icon: "🚀"
+        url: "/create"
+        description: "Deploy new service"
+      - title: "Deployments"
+        icon: "📊"
+        url: "/catalog?filters=tag:deployment"
+        description: "View deployments"
+      - title: "CI/CD Pipelines"
+        icon: "🔧"
+        url: "/catalog?filters=tag:pipeline"
+        description: "Manage pipelines"
+      - title: "Monitoring"
+        icon: "📈"
+        url: "/catalog?filters=tag:monitoring"
+        description: "System monitoring"
 
   notifications:
     enabled: true
