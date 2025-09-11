@@ -6,6 +6,20 @@ metadata:
   version: "1.0.0"
   
 templates:
+  - id: ba-main
+    name: BA Operations Overview
+    description: Central hub with general information and navigation to specialized dashboards
+    category: Overview
+    configPath: templates/ba-main-dashboard/config.yaml
+    icon: "🏠"
+    target: main
+    isDefault: true
+    tags:
+      - overview
+      - main
+      - general
+      - navigation
+      
   - id: ba-devops
     name: BA DevOps Dashboard
     description: Operations monitoring and deployment status
