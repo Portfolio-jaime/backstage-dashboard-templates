@@ -1,0 +1,67 @@
+apiVersion: backstage.io/v1beta1
+kind: DashboardRegistry
+metadata:
+  name: ba-dashboard-registry
+  description: British Airways Backstage Dashboard Templates Registry
+  version: "1.0.0"
+  
+templates:
+  - id: ba-devops
+    name: BA DevOps Dashboard
+    description: Operations monitoring and deployment status
+    category: Operations
+    configPath: templates/ba-devops-dashboard/config.yaml
+    icon: "🚀"
+    target: devops
+    tags:
+      - monitoring
+      - deployment
+      - ops
+    
+  - id: ba-platform
+    name: Platform Engineering
+    description: Infrastructure and platform metrics
+    category: Engineering
+    configPath: templates/ba-platform-dashboard/config.yaml
+    icon: "⚙️"
+    target: platform
+    tags:
+      - infrastructure
+      - platform
+      - engineering
+    
+  - id: ba-security
+    name: Security Dashboard
+    description: Security alerts and compliance monitoring
+    category: Security
+    configPath: templates/ba-security-dashboard/config.yaml
+    icon: "🔒"
+    target: security
+    tags:
+      - security
+      - compliance
+      - alerts
+    
+  - id: ba-management
+    name: Executive Dashboard
+    description: High-level metrics and business insights
+    category: Management
+    configPath: templates/ba-management-dashboard/config.yaml
+    icon: "📊"
+    target: management
+    tags:
+      - executive
+      - metrics
+      - business
+    
+  - id: ba-developer
+    name: Developer Experience
+    description: Developer tools and productivity metrics
+    category: Development
+    configPath: templates/ba-developer-dashboard/config.yaml
+    icon: "💻"
+    target: developer
+    tags:
+      - developer
+      - tools
+      - productivity

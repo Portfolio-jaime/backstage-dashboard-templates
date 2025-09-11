@@ -1,0 +1,121 @@
+apiVersion: backstage.io/v1beta1
+kind: DashboardConfig
+metadata:
+  name: ba-developer-dashboard
+  title: BA Developer Experience Hub
+  subtitle: Developer Tools and Productivity Metrics
+  version: "1.0.0"
+  author: "British Airways Developer Experience Team"
+  
+spec:
+  widgets:
+    # Developer-focused widgets
+    catalog:
+      enabled: true
+      refreshInterval: 120000
+      maxServices: 15
+      title: "Developer Services & APIs"
+      developerView: true
+      showTemplates: true
+      showAPIs: true
+      
+    github:
+      enabled: true
+      refreshInterval: 180000
+      maxEvents: 15
+      title: "Development Activity"
+      repositories:
+        - "Portfolio-jaime/developer-tools"
+        - "Portfolio-jaime/api-templates"
+        - "Portfolio-jaime/backstage-plugins"
+        - "Portfolio-jaime/development-standards"
+      developerView: true
+      showPRs: true
+      showIssues: true
+      
+    worldClock:
+      enabled: true
+      refreshInterval: 1000
+      title: "Developer Teams Worldwide"
+      timezones:
+        - name: "London Dev"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+        - name: "Krakow Dev"
+          timezone: "Europe/Warsaw"
+          flag: "🇵🇱"
+        - name: "Mumbai Dev"
+          timezone: "Asia/Kolkata"
+          flag: "🇮🇳"
+        - name: "Remote Dev"
+          timezone: "America/New_York"
+          flag: "🏠"
+          
+    # System health from developer perspective
+    systemHealth:
+      enabled: true
+      refreshInterval: 60000
+      title: "Development Environment Health"
+      developerView: true
+      showCI: true
+      showTesting: true
+      showDeployments: true
+      
+    # Disable non-developer widgets
+    flightOps:
+      enabled: false
+      
+    costDashboard:
+      enabled: false
+      
+    security:
+      enabled: false
+      
+  layout:
+    grid:
+      columns: 12
+      spacing: 3
+    positions:
+      search: { xs: 12 }
+      welcome: { xs: 12, md: 8 }
+      worldClock: { xs: 12, md: 4 }
+      catalog: { xs: 12 }
+      github: { xs: 12, md: 8 }
+      systemHealth: { xs: 12, md: 4 }
+      
+  theme:
+    primaryColor: "#7b1fa2"      # Purple for creativity/development
+    secondaryColor: "#00acc1"    # Cyan for innovation
+    backgroundColor: "#f3f4f6"   # Developer-friendly background
+    cardElevation: 2
+    borderRadius: 8
+    
+  branding:
+    companyName: "British Airways Developer Experience"
+    companyLogo: "/ba-dev-logo.png"
+    motto: "Empowering developers to build the future of aviation"
+    
+  notifications:
+    enabled: true
+    developerMode: true
+    channels:
+      - slack
+      - email
+      - github
+    alertTypes:
+      - build_failure
+      - deployment_success
+      - pr_review_needed
+      - dependency_update
+      
+  developer:
+    features:
+      showCodeMetrics: true
+      showTestCoverage: true
+      showDeploymentStatus: true
+      showDocumentation: true
+      quickActions:
+        - "Create new service"
+        - "Run tests"
+        - "Deploy to staging"
+        - "View documentation"

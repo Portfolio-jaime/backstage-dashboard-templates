@@ -1,0 +1,98 @@
+apiVersion: backstage.io/v1beta1
+kind: DashboardConfig
+metadata:
+  name: ba-platform-dashboard
+  title: BA Platform Engineering
+  subtitle: Infrastructure and Platform Monitoring
+  version: "1.0.0"
+  author: "British Airways Platform Team"
+  
+spec:
+  widgets:
+    # Core platform monitoring
+    systemHealth:
+      enabled: true
+      refreshInterval: 30000
+      title: "Platform Health Status"
+      
+    catalog:
+      enabled: true
+      refreshInterval: 120000
+      maxServices: 12
+      title: "Platform Services"
+      
+    worldClock:
+      enabled: true
+      refreshInterval: 1000
+      title: "Global Platform Operations"
+      timezones:
+        - name: "London Platform"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+        - name: "Mumbai Platform"
+          timezone: "Asia/Kolkata"
+          flag: "🇮🇳"
+        - name: "New York Platform"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+        - name: "Singapore Platform"
+          timezone: "Asia/Singapore"
+          flag: "🇸🇬"
+          
+    # Platform-specific widgets
+    github:
+      enabled: true
+      refreshInterval: 300000
+      maxEvents: 12
+      title: "Platform Repositories Activity"
+      repositories:
+        - "Portfolio-jaime/backstage-platform-tools"
+        - "Portfolio-jaime/infrastructure-templates"
+        - "Portfolio-jaime/platform-automation"
+        
+    # Disabled widgets for platform focus
+    flightOps:
+      enabled: false
+      
+    costDashboard:
+      enabled: true
+      refreshInterval: 600000
+      title: "Infrastructure Costs"
+      
+    security:
+      enabled: false
+      
+  layout:
+    grid:
+      columns: 12
+      spacing: 3
+    positions:
+      search: { xs: 12 }
+      welcome: { xs: 12, md: 8 }
+      worldClock: { xs: 12, md: 4 }
+      systemHealth: { xs: 12 }
+      catalog: { xs: 12, md: 8 }
+      github: { xs: 12, md: 4 }
+      costDashboard: { xs: 12 }
+      
+  theme:
+    primaryColor: "#2e7d32"    # Green for platform/infrastructure
+    secondaryColor: "#ff6f00"   # Orange accent
+    backgroundColor: "#f5f5f5"
+    cardElevation: 2
+    borderRadius: 8
+    
+  branding:
+    companyName: "British Airways Platform Team"
+    companyLogo: "/ba-logo.png"
+    motto: "Building the foundation for digital aviation"
+    
+  notifications:
+    enabled: true
+    channels:
+      - slack
+      - email
+    alertTypes:
+      - system_health
+      - cost_anomaly
+      - deployment_failure

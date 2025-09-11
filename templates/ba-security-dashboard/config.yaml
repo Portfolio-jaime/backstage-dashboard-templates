@@ -1,0 +1,117 @@
+apiVersion: backstage.io/v1beta1
+kind: DashboardConfig
+metadata:
+  name: ba-security-dashboard
+  title: BA Security Operations Center
+  subtitle: Security Monitoring and Compliance
+  version: "1.0.0"
+  author: "British Airways Security Team"
+  
+spec:
+  widgets:
+    # Core security widgets
+    security:
+      enabled: true
+      refreshInterval: 60000
+      alertThreshold: "medium"
+      title: "Security Alerts Dashboard"
+      showCritical: true
+      showMedium: true
+      showLow: false
+      
+    systemHealth:
+      enabled: true
+      refreshInterval: 30000
+      title: "Security System Status"
+      securityFocus: true
+      
+    catalog:
+      enabled: true
+      refreshInterval: 300000
+      maxServices: 8
+      title: "Security-Critical Services"
+      securityFocus: true
+      filterByTag: "security-critical"
+      
+    worldClock:
+      enabled: true
+      refreshInterval: 1000
+      title: "Global Security Operations"
+      timezones:
+        - name: "London SOC"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+        - name: "Singapore SOC"
+          timezone: "Asia/Singapore"
+          flag: "🇸🇬"
+        - name: "New York SOC"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+        - name: "Sydney SOC"
+          timezone: "Australia/Sydney"
+          flag: "🇦🇺"
+          
+    # Security-focused GitHub monitoring
+    github:
+      enabled: true
+      refreshInterval: 180000
+      maxEvents: 8
+      title: "Security Repository Activity"
+      repositories:
+        - "Portfolio-jaime/security-tools"
+        - "Portfolio-jaime/compliance-automation"
+        - "Portfolio-jaime/security-policies"
+        
+    # Disabled non-security widgets
+    flightOps:
+      enabled: false
+      
+    costDashboard:
+      enabled: false
+      
+  layout:
+    grid:
+      columns: 12
+      spacing: 2  # Tighter spacing for security dashboard
+    positions:
+      search: { xs: 12 }
+      welcome: { xs: 12, md: 8 }
+      worldClock: { xs: 12, md: 4 }
+      security: { xs: 12 }
+      systemHealth: { xs: 12, md: 8 }
+      github: { xs: 12, md: 4 }
+      catalog: { xs: 12 }
+      
+  theme:
+    primaryColor: "#d32f2f"      # Red for security/alerts
+    secondaryColor: "#ff9800"    # Orange for warnings
+    backgroundColor: "#fafafa"   # Light background for readability
+    cardElevation: 3             # Higher elevation for security importance
+    borderRadius: 6
+    
+  branding:
+    companyName: "British Airways Security Operations"
+    companyLogo: "/ba-security-logo.png"
+    motto: "Vigilance in every byte, security in every flight"
+    
+  notifications:
+    enabled: true
+    urgentMode: true
+    channels:
+      - slack
+      - email
+      - pagerduty
+    alertTypes:
+      - security_incident
+      - compliance_violation
+      - system_breach
+      - vulnerability_detected
+      
+  security:
+    classification: "restricted"
+    accessControl:
+      requireMFA: true
+      allowedRoles:
+        - "security-team"
+        - "soc-analyst"
+        - "security-manager"
