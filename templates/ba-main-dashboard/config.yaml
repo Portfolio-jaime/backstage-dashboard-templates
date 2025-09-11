@@ -65,12 +65,21 @@ spec:
         - name: "New York"
           timezone: "America/New_York"
           flag: "🇺🇸"
+        - name: "Los Angeles"
+          timezone: "America/Los_Angeles"
+          flag: "🇺🇸"
         - name: "Singapore"
           timezone: "Asia/Singapore"
           flag: "🇸🇬"
         - name: "Mumbai"
           timezone: "Asia/Kolkata"
           flag: "🇮🇳"
+        - name: "Sydney"
+          timezone: "Australia/Sydney"
+          flag: "🇦🇺"
+        - name: "Tokyo"
+          timezone: "Asia/Tokyo"
+          flag: "🇯🇵"
           
     # Disabled simulated widgets - Main dashboard focuses on real information only
     flightOps:
