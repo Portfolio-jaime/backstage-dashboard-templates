@@ -54,17 +54,18 @@ spec:
         sortBy: "updated"
         maxRepos: 10
         
-    # Disabled widgets for platform focus
+    # Disabled simulated widgets - Platform dashboard focuses on real infrastructure
     flightOps:
       enabled: false
+      reason: "Not relevant for platform engineering"
       
     costDashboard:
-      enabled: true
-      refreshInterval: 600000
-      title: "Infrastructure Costs"
+      enabled: false
+      reason: "No real cost API available"
       
     security:
       enabled: false
+      reason: "Use dedicated Security dashboard"
       
   layout:
     grid:

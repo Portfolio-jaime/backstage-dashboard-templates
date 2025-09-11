@@ -41,90 +41,22 @@ spec:
         showUptime: true
         showResponseTime: true
     
+    # Disabled simulated widgets - DevOps dashboard focuses on real data
     flightOps:
       enabled: false
-      refreshInterval: 300000 # 5 minutes
-      mockData: false
-      endpoints:
-        healthCheck: "https://api.ba.com/flight-ops/v1/health"
-        metrics: "https://api.ba.com/flight-ops/v1/metrics"
-        realTimeData: "https://api.ba.com/flight-ops/v1/realtime"
-      displayMetrics:
-        - flightsOnTime
-        - delayedFlights
-        - cancelledFlights
-        - activeRoutes
-        - passengerCapacity
+      reason: "No real API available"
     
     costDashboard:
       enabled: false
-      refreshInterval: 900000 # 15 minutes
-      mockData: false
-      cloudProviders:
-        - name: aws
-          region: eu-west-1
-          costApi: "https://cost-api.ba.com/aws"
-        - name: azure
-          region: uksouth
-          costApi: "https://cost-api.ba.com/azure"
-        - name: gcp
-          region: europe-west2
-          costApi: "https://cost-api.ba.com/gcp"
-      budgetAlerts:
-        threshold: 80 # percentage
-        notificationChannels: ["slack", "email"]
+      reason: "No real API available"
     
     security:
       enabled: false
-      refreshInterval: 60000 # 1 minute
-      mockData: false
-      alertSources:
-        - name: "Snyk"
-          endpoint: "https://security.ba.com/snyk/alerts"
-          severity: ["high", "critical"]
-        - name: "SonarQube"
-          endpoint: "https://security.ba.com/sonar/alerts"
-          severity: ["major", "blocker"]
-        - name: "Dependabot"
-          endpoint: "https://security.ba.com/dependabot/alerts"
-          severity: ["high", "critical"]
-        - name: "AWS Security Hub"
-          endpoint: "https://security.ba.com/aws-security/alerts"
-          severity: ["medium", "high", "critical"]
-      displayOptions:
-        maxAlerts: 10
-        autoRefresh: true
-        showTrends: true
+      reason: "No real API available"
     
     systemHealth:
       enabled: false
-      refreshInterval: 30000 # 30 seconds
-      mockData: false
-      services:
-        - name: "API Gateway"
-          endpoint: "https://api-gateway.ba.com/health"
-          sla: 99.9
-          environment: "production"
-        - name: "Booking Service"
-          endpoint: "https://booking.ba.com/health"
-          sla: 99.5
-          environment: "production"
-        - name: "Customer DB"
-          endpoint: "https://db-proxy.ba.com/health"
-          sla: 99.8
-          environment: "production"
-        - name: "Flight Info"
-          endpoint: "https://flight-info.ba.com/health"
-          sla: 99.7
-          environment: "production"
-        - name: "Mobile App"
-          endpoint: "https://mobile-api.ba.com/health"
-          sla: 98.9
-          environment: "production"
-      healthMetrics:
-        overallThreshold: 90
-        warningThreshold: 95
-        criticalThreshold: 85
+      reason: "No real API available"
     
     worldClock:
       enabled: true

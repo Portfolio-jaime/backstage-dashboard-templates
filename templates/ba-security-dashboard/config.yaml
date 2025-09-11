@@ -9,9 +9,10 @@ metadata:
   
 spec:
   widgets:
-    # Core security widgets
+    # Core security widgets - DISABLED until real API available
     security:
-      enabled: true
+      enabled: false
+      reason: "No real security API available - showing catalog and GitHub only"
       refreshInterval: 60000
       alertThreshold: "medium"
       title: "Security Alerts Dashboard"
@@ -20,7 +21,8 @@ spec:
       showLow: false
       
     systemHealth:
-      enabled: true
+      enabled: false
+      reason: "No real health API available"
       refreshInterval: 30000
       title: "Security System Status"
       securityFocus: true

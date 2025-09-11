@@ -9,9 +9,10 @@ metadata:
   
 spec:
   widgets:
-    # Executive-level widgets
+    # Executive-level widgets - DISABLED until real APIs available
     costDashboard:
-      enabled: true
+      enabled: false
+      reason: "No real cost API available"
       refreshInterval: 300000
       title: "IT Cost Overview"
       executiveView: true
@@ -19,7 +20,8 @@ spec:
       showBudgetComparison: true
       
     systemHealth:
-      enabled: true
+      enabled: false
+      reason: "No real system health API available"
       refreshInterval: 60000
       title: "Overall System Health"
       summaryMode: true
@@ -65,17 +67,18 @@ spec:
       executiveView: true
       showOnlyReleases: true
         
-    # Flight operations for business context
+    # Disabled simulated widgets
     flightOps:
-      enabled: true
+      enabled: false
+      reason: "No real flight operations API available"
       refreshInterval: 300000
       title: "Flight Operations Impact"
       executiveView: true
       showSummaryOnly: true
       
-    # Disable detailed technical widgets
     security:
       enabled: false
+      reason: "Use dedicated Security dashboard"
       
   layout:
     grid:

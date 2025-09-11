@@ -54,9 +54,10 @@ spec:
           timezone: "America/New_York"
           flag: "🏠"
           
-    # System health from developer perspective
+    # Disabled simulated widgets - Developer dashboard focuses on real tools
     systemHealth:
-      enabled: true
+      enabled: false
+      reason: "No real development environment health API available"
       refreshInterval: 60000
       title: "Development Environment Health"
       developerView: true
@@ -64,15 +65,17 @@ spec:
       showTesting: true
       showDeployments: true
       
-    # Disable non-developer widgets
     flightOps:
       enabled: false
+      reason: "Not relevant for developers"
       
     costDashboard:
       enabled: false
+      reason: "Not relevant for developers"
       
     security:
       enabled: false
+      reason: "Use dedicated Security dashboard"
       
   layout:
     grid:
