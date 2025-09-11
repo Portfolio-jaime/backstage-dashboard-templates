@@ -57,10 +57,14 @@ spec:
       refreshInterval: 180000
       maxEvents: 8
       title: "Security Repository Activity"
-      repositories:
-        - "Portfolio-jaime/security-tools"
-        - "Portfolio-jaime/compliance-automation"
-        - "Portfolio-jaime/security-policies"
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      filters:
+        keywords: ["security", "compliance", "audit", "scan", "vulnerability"]
+        topics: ["security", "compliance", "scanning", "monitoring"]
+        exclude: ["archived", "private"]
+        sortBy: "updated"
+        maxRepos: 6
         
     # Disabled non-security widgets
     flightOps:

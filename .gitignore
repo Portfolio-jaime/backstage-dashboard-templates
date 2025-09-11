@@ -1,0 +1,62 @@
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
+.venv/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# VSCode
+.vscode/
+
+# Build
+/dist/
+/build/
+/site/
+
+# Backup files
+*.bak
+*.backup
+
+# YAML temp files
+*.tmp.yaml
+
+# Docker
+*.pid
+
+# Drawio
+*.drawio.bkp
+
+# Misc
+*.swp
+*.swo
+
+# Ignore coverage reports
+coverage/
+*.cover
+*.coverage
+
+# Ignore test output
+/test-output/
+
+# Ignore compiled Go binaries
+*.out
+*.exe
+*.test
+
+# Ignore mkdocs build
+site/
+
+# Ignore workspace settings
+*.code-workspace

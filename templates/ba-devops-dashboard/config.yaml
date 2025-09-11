@@ -17,14 +17,14 @@ spec:
     github:
       enabled: true
       refreshInterval: 300000 # 5 minutes
-      repositories:
-        - "Portfolio-jaime/backstage-solutions"
-        - "Portfolio-jaime/Go-app-1"
-        - "Portfolio-jaime/python-app-20"
-        - "Portfolio-jaime/cli-go-11"
-        - "Portfolio-jaime/gitops"
-        - "Portfolio-jaime/terra-test-terraform-module"
-        - "Portfolio-jaime/vpc-terraform-module"
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      filters:
+        keywords: ["backstage", "devops", "k8s", "go", "terraform", "gitops", "cluster", "eks"]
+        topics: ["backstage", "devops", "kubernetes", "go", "terraform", "gitops"]
+        exclude: ["archived", "private"]
+        sortBy: "updated"
+        maxRepos: 8
       maxEvents: 8
       apiConfig:
         usePublicApi: true

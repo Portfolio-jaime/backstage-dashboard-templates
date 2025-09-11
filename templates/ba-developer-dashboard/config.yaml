@@ -24,11 +24,14 @@ spec:
       refreshInterval: 180000
       maxEvents: 15
       title: "Development Activity"
-      repositories:
-        - "Portfolio-jaime/developer-tools"
-        - "Portfolio-jaime/api-templates"
-        - "Portfolio-jaime/backstage-plugins"
-        - "Portfolio-jaime/development-standards"
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      filters:
+        keywords: ["api", "app", "service", "tool", "template", "go", "python"]
+        topics: ["api", "microservice", "backend", "frontend", "development"]
+        exclude: ["archived", "private"]
+        sortBy: "updated"
+        maxRepos: 12
       developerView: true
       showPRs: true
       showIssues: true

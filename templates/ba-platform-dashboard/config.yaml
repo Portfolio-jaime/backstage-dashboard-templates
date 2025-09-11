@@ -45,10 +45,14 @@ spec:
       refreshInterval: 300000
       maxEvents: 12
       title: "Platform Repositories Activity"
-      repositories:
-        - "Portfolio-jaime/backstage-platform-tools"
-        - "Portfolio-jaime/infrastructure-templates"
-        - "Portfolio-jaime/platform-automation"
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      filters:
+        keywords: ["k8s", "cluster", "terraform", "infrastructure", "platform", "helm"]
+        topics: ["kubernetes", "terraform", "infrastructure", "platform", "helm", "devops"]
+        exclude: ["archived", "private"]
+        sortBy: "updated"
+        maxRepos: 10
         
     # Disabled widgets for platform focus
     flightOps:
