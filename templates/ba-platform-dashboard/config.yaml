@@ -88,7 +88,20 @@ spec:
   theme:
     primaryColor: "#2e7d32"    # Green for platform/infrastructure
     secondaryColor: "#ff6f00"   # Orange accent
-    backgroundColor: "#f5f5f5"
+    # Light theme colors
+    light:
+      backgroundColor: "#f5f5f5"
+      surfaceColor: "#ffffff"
+      textColor: "#333333"
+      cardBackground: "#ffffff"
+      borderColor: "#e0e0e0"
+    # Dark theme colors  
+    dark:
+      backgroundColor: "#0d1b0f"  # Dark green tint
+      surfaceColor: "#1a2e1d"
+      textColor: "#ffffff"
+      cardBackground: "#2d4a32"
+      borderColor: "#4a7c59"
     cardElevation: 2
     borderRadius: 8
     

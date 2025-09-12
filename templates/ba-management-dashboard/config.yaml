@@ -90,7 +90,20 @@ spec:
   theme:
     primaryColor: "#1a237e"        # Executive Deep Blue
     secondaryColor: "#ffc107"      # Gold accent
-    backgroundColor: "#f8f9fa"     # Clean light background
+    # Light theme colors
+    light:
+      backgroundColor: "#f8f9fa"     # Clean light background
+      surfaceColor: "#ffffff"
+      textColor: "#333333"
+      cardBackground: "#ffffff"
+      borderColor: "#dee2e6"
+    # Dark theme colors  
+    dark:
+      backgroundColor: "#0a0d1a"     # Dark blue tint
+      surfaceColor: "#141829"
+      textColor: "#ffffff"
+      cardBackground: "#1d2442"
+      borderColor: "#3d4a7a"
     cardElevation: 4               # Higher elevation for executive prominence
     borderRadius: 12               # More rounded for modern executive look
 

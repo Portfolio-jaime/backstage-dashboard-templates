@@ -72,7 +72,22 @@ spec:
   theme:
     primaryColor: "#d32f2f"        # Security Red
     secondaryColor: "#ff6f00"      # Orange for warnings
-    backgroundColor: "#ffebee"     # Light red background
+    # Light theme colors
+    light:
+      backgroundColor: "#ffebee"     # Light red background
+      surfaceColor: "#ffffff"
+      textColor: "#333333"
+      cardBackground: "#ffffff"
+      borderColor: "#ffcdd2"
+    # Dark theme colors  
+    dark:
+      backgroundColor: "#1a0d0d"     # Dark red tint
+      surfaceColor: "#2d1414"
+      textColor: "#ffffff"
+      cardBackground: "#4a1d1d"
+      borderColor: "#7c3a3a"
+    cardElevation: 3
+    borderRadius: 8
 
   content:
     welcome:

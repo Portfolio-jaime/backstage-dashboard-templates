@@ -60,7 +60,22 @@ spec:
   theme:
     primaryColor: "#6a1b9a"        # Developer Purple
     secondaryColor: "#00acc1"      # Cyan accent
-    backgroundColor: "#f3e5f5"     # Light purple background
+    # Light theme colors
+    light:
+      backgroundColor: "#f3e5f5"     # Light purple background
+      surfaceColor: "#ffffff"
+      textColor: "#333333"
+      cardBackground: "#ffffff"
+      borderColor: "#e1bee7"
+    # Dark theme colors  
+    dark:
+      backgroundColor: "#1a0d1f"     # Dark purple tint
+      surfaceColor: "#2d1b35"
+      textColor: "#ffffff"
+      cardBackground: "#4a2c5a"
+      borderColor: "#7c4dff"
+    cardElevation: 2
+    borderRadius: 8
 
   content:
     welcome:

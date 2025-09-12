@@ -135,8 +135,20 @@ spec:
   theme:
     primaryColor: "#1976d2"
     secondaryColor: "#ff9800"
-    backgroundColor: "#f5f5f5"
-    surfaceColor: "#ffffff"
+    # Light theme colors
+    light:
+      backgroundColor: "#f5f5f5"
+      surfaceColor: "#ffffff"
+      textColor: "#333333"
+      cardBackground: "#ffffff"
+      borderColor: "#e0e0e0"
+    # Dark theme colors  
+    dark:
+      backgroundColor: "#121212"
+      surfaceColor: "#1e1e1e"
+      textColor: "#ffffff"
+      cardBackground: "#2d2d2d"
+      borderColor: "#404040"
     errorColor: "#f44336"
     warningColor: "#ff9800"
     successColor: "#4caf50"

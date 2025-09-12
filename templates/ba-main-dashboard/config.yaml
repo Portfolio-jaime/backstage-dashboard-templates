@@ -80,6 +80,9 @@ spec:
         - name: "Santiago"
           timezone: "America/Santiago"
           flag: "🇨🇱"
+        - name: "Bogotá"
+          timezone: "America/Bogota"
+          flag: "🇨🇴"
         - name: "Tokyo"
           timezone: "Asia/Tokyo"
           flag: "🇯🇵"
@@ -112,7 +115,20 @@ spec:
   theme:
     primaryColor: "#1976d2"      # BA Blue
     secondaryColor: "#dc004e"    # BA Red
-    backgroundColor: "#f8f9fa"
+    # Light theme colors
+    light:
+      backgroundColor: "#f8f9fa"
+      surfaceColor: "#ffffff"
+      textColor: "#333333"
+      cardBackground: "#ffffff"
+      borderColor: "#e0e0e0"
+    # Dark theme colors  
+    dark:
+      backgroundColor: "#121212"
+      surfaceColor: "#1e1e1e"
+      textColor: "#ffffff"
+      cardBackground: "#2d2d2d"
+      borderColor: "#404040"
     cardElevation: 2
     borderRadius: 8
     
