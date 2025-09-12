@@ -42,21 +42,10 @@ spec:
         showSecurityStatus: true
         showByCategory: true
     
+    # No world clock in specialized dashboards
     worldClock:
-      enabled: true
-      refreshInterval: 1000
-      title: "Security Operations Centers"
-      timezones:
-        - name: "London SOC"
-          timezone: "Europe/London"
-          flag: "🇬🇧"
-          primary: true
-        - name: "Washington DC"
-          timezone: "America/New_York"
-          flag: "🇺🇸"
-        - name: "Singapore SOC"
-          timezone: "Asia/Singapore"
-          flag: "🇸🇬"
+      enabled: false
+      reason: "World clock only shown on main dashboard"
     
     # Disabled widgets - Security focuses on security-specific data
     flightOps:
@@ -66,8 +55,19 @@ spec:
       enabled: false
       reason: "Cost management handled by dedicated management dashboard"
     systemHealth:
-      enabled: false
-      reason: "System health handled by platform dashboard"
+      enabled: true
+      refreshInterval: 60000
+      title: "Security System Health"
+      showOverview: true
+      filters:
+        tags: ["security", "monitoring", "compliance"]
+    security:
+      enabled: true
+      refreshInterval: 30000
+      title: "Security Alerts & Threats"
+      showOverview: true
+      filters:
+        tags: ["security", "vulnerability", "threat", "incident"]
 
   theme:
     primaryColor: "#d32f2f"        # Security Red

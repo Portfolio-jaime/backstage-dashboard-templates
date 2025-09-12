@@ -38,23 +38,10 @@ spec:
         showHealthStatus: true
         hideApplicationServices: true
       
+    # No world clock in specialized dashboards  
     worldClock:
-      enabled: true
-      refreshInterval: 1000
-      title: "Global Platform Operations"
-      timezones:
-        - name: "London Platform"
-          timezone: "Europe/London"
-          flag: "🇬🇧"
-        - name: "Mumbai Platform"
-          timezone: "Asia/Kolkata"
-          flag: "🇮🇳"
-        - name: "New York Platform"
-          timezone: "America/New_York"
-          flag: "🇺🇸"
-        - name: "Singapore Platform"
-          timezone: "Asia/Singapore"
-          flag: "🇸🇬"
+      enabled: false
+      reason: "World clock only shown on main dashboard"
           
     # Platform-specific widgets
     github:

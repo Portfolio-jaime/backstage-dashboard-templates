@@ -38,28 +38,10 @@ spec:
         showAPIDocumentation: true
         showByCategory: true
     
+    # No world clock in specialized dashboards
     worldClock:
-      enabled: true
-      refreshInterval: 1000
-      title: "Development Team Locations"
-      timezones:
-        - name: "London Dev"
-          timezone: "Europe/London"
-          flag: "🇬🇧"
-          primary: true
-        - name: "Krakow Dev"
-          timezone: "Europe/Warsaw"
-          flag: "🇵🇱"
-        - name: "Bangalore Dev"
-          timezone: "Asia/Kolkata"
-          flag: "🇮🇳"
-        - name: "New York Dev"
-          timezone: "America/New_York"
-          flag: "🇺🇸"
-      displayOptions:
-        format24Hour: true
-        showSeconds: false
-        showDate: true
+      enabled: false
+      reason: "World clock only shown on main dashboard"
     
     # Disabled widgets - Developer dashboard focuses on development tools
     flightOps:

@@ -70,8 +70,16 @@ spec:
       enabled: false
       reason: "Operational flight data handled by operations teams"
     costDashboard:
+      enabled: true
+      refreshInterval: 300000
+      title: "Executive Cost Overview"
+      showOverview: true
+      filters:
+        tags: ["cost", "budget", "executive", "financial"]
+    # No world clock in specialized dashboards  
+    worldClock:
       enabled: false
-      reason: "Would be enabled with real cost management API integration"
+      reason: "World clock only shown on main dashboard"
     security:
       enabled: false
       reason: "Security details handled by dedicated security dashboard"

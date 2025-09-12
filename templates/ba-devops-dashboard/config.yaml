@@ -49,63 +49,39 @@ spec:
         showByCategory: true
         showOverview: true
     
-    # Disabled simulated widgets - DevOps dashboard focuses on real data
+    # DevOps specific widgets - Focus on CI/CD and deployments
+    systemHealth:
+      enabled: true
+      refreshInterval: 30000
+      title: "DevOps System Health"
+      showOverview: true
+      filters:
+        tags: ["deployment", "pipeline", "monitoring"]
+        
     flightOps:
       enabled: false
-      reason: "No real API available"
+      reason: "Not relevant for DevOps operations"
     
     costDashboard:
-      enabled: false
-      reason: "No real API available"
+      enabled: true
+      refreshInterval: 300000
+      title: "Infrastructure Costs"
+      showOverview: true
+      filters:
+        tags: ["infrastructure", "deployment", "cloud"]
     
     security:
-      enabled: false
-      reason: "No real API available"
-    
-    systemHealth:
-      enabled: false
-      reason: "No real API available"
-    
-    worldClock:
       enabled: true
-      refreshInterval: 1000 # 1 second
-      timezones:
-        - name: "London"
-          timezone: "Europe/London"
-          flag: "🇬🇧"
-          primary: true
-        - name: "New York"
-          timezone: "America/New_York"
-          flag: "🇺🇸"
-          primary: false
-        - name: "Bogotá"
-          timezone: "America/Bogota"
-          flag: "🇨🇴"
-          primary: false
-        - name: "Santiago"
-          timezone: "America/Santiago"
-          flag: "🇨🇱"
-          primary: false
-        - name: "Montevideo"
-          timezone: "America/Montevideo"
-          flag: "🇺🇾"
-          primary: false
-        - name: "Buenos Aires"
-          timezone: "America/Argentina/Buenos_Aires"
-          flag: "🇦🇷"
-          primary: false
-        - name: "Hong Kong"
-          timezone: "Asia/Hong_Kong"
-          flag: "🇭🇰"
-          primary: false
-        - name: "Sydney"
-          timezone: "Australia/Sydney"
-          flag: "🇦🇺"
-          primary: false
-      displayOptions:
-        format24Hour: true
-        showSeconds: true
-        showDate: true
+      refreshInterval: 180000
+      title: "DevOps Security Alerts"
+      showOverview: true
+      filters:
+        tags: ["security", "vulnerability", "compliance"]
+    
+    # No world clock in specialized dashboards
+    worldClock:
+      enabled: false
+      reason: "World clock only shown on main dashboard"
 
   layout:
     grid:
