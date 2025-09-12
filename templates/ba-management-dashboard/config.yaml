@@ -1,136 +1,133 @@
+# BA Management/Executive Dashboard Configuration
 apiVersion: backstage.io/v1beta1
 kind: DashboardConfig
 metadata:
   name: ba-management-dashboard
-  title: BA Executive Dashboard
-  subtitle: High-Level Metrics and Business Insights
+  title: "BA Executive Dashboard"
+  subtitle: "Strategic metrics and business intelligence overview"
   version: "1.0.0"
+  namespace: ba-management
   author: "British Airways Executive Team"
-  
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/Portfolio-jaime/backstage-dashboard-templates/blob/main/templates/ba-management-dashboard/config.yaml
+    backstage.io/created-by: executive-team@ba.com
+    backstage.io/last-updated: "2025-01-15T10:30:00Z"
+
 spec:
   widgets:
-    # Executive-level widgets - DISABLED until real APIs available
-    costDashboard:
-      enabled: false
-      reason: "No real cost API available"
-      refreshInterval: 300000
-      title: "IT Cost Overview"
-      executiveView: true
-      showTrends: true
-      showBudgetComparison: true
-      
-    systemHealth:
-      enabled: false
-      reason: "No real system health API available"
-      refreshInterval: 60000
-      title: "Overall System Health"
-      summaryMode: true
-      showOnlyMajorIssues: true
-      
+    github:
+      enabled: true
+      refreshInterval: 600000 # 10 minutes (less frequent for executive level)
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      filters:
+        keywords: ["strategic", "executive", "dashboard", "analytics", "reporting", "metrics", "kpi", "business", "performance", "revenue", "customer", "transformation"]
+        topics: ["business-intelligence", "analytics", "reporting", "metrics", "dashboard", "executive", "strategic", "performance", "kpi"]
+        exclude: ["archived", "private", "fork", "test", "demo"]
+        sortBy: "stars" # Sort by popularity for executive visibility
+        maxRepos: 6 # Fewer repos, focus on strategic projects
+      maxEvents: 8
+    
     catalog:
       enabled: true
-      refreshInterval: 300000
+      refreshInterval: 300000 # 5 minutes (less frequent)
       maxServices: 8
-      title: "Key Business Services"
-      executiveView: true
-      showOnlyCritical: true
-      filterByTag: "business-critical"
-      
+      title: "Strategic Digital Services"
+      filters:
+        kinds: ["Component", "API", "System"]
+        types: ["service", "system", "dashboard", "analytics", "reporting"]
+        tags: ["strategic", "executive", "business-critical", "revenue", "customer-facing"]
+      displayOptions:
+        showOverview: true
+        showBusinessMetrics: true
+        showByCategory: true
+    
     worldClock:
       enabled: true
       refreshInterval: 1000
-      title: "Global Operations Centers"
+      title: "Global Business Operations"
       timezones:
         - name: "London HQ"
           timezone: "Europe/London"
           flag: "🇬🇧"
-        - name: "New York Hub"
+          primary: true
+        - name: "New York (NYSE)"
           timezone: "America/New_York"
           flag: "🇺🇸"
-        - name: "Hong Kong Hub"
-          timezone: "Asia/Hong_Kong"
-          flag: "🇭🇰"
-        - name: "Sydney Hub"
-          timezone: "Australia/Sydney"
-          flag: "🇦🇺"
-          
-    # High-level GitHub activity
-    github:
-      enabled: true
-      refreshInterval: 600000
-      maxEvents: 5
-      title: "Strategic Project Activity"
-      repositories:
-        - "Portfolio-jaime/strategic-initiatives"
-        - "Portfolio-jaime/digital-transformation"
-        - "Portfolio-jaime/executive-reports"
-      executiveView: true
-      showOnlyReleases: true
-        
-    # Disabled simulated widgets
+        - name: "Tokyo (Business)"
+          timezone: "Asia/Tokyo"
+          flag: "🇯🇵"
+        - name: "Dubai (Middle East)"
+          timezone: "Asia/Dubai"
+          flag: "🇦🇪"
+      displayOptions:
+        format24Hour: false # 12-hour for executive preference
+        showSeconds: false
+        showDate: true
+    
+    # Disabled operational widgets - Management focuses on strategic overview
     flightOps:
       enabled: false
-      reason: "No real flight operations API available"
-      refreshInterval: 300000
-      title: "Flight Operations Impact"
-      executiveView: true
-      showSummaryOnly: true
-      
+      reason: "Operational flight data handled by operations teams"
+    costDashboard:
+      enabled: false
+      reason: "Would be enabled with real cost management API integration"
     security:
       enabled: false
-      reason: "Use dedicated Security dashboard"
-      
-  layout:
-    grid:
-      columns: 12
-      spacing: 4  # Generous spacing for executive view
-    positions:
-      search: { xs: 12 }
-      welcome: { xs: 12, md: 8 }
-      worldClock: { xs: 12, md: 4 }
-      costDashboard: { xs: 12, md: 6 }
-      systemHealth: { xs: 12, md: 6 }
-      flightOps: { xs: 12, md: 8 }
-      github: { xs: 12, md: 4 }
-      catalog: { xs: 12 }
-      
+      reason: "Security details handled by dedicated security dashboard"
+    systemHealth:
+      enabled: false
+      reason: "Technical health handled by platform teams"
+
   theme:
-    primaryColor: "#1565c0"      # Executive blue
-    secondaryColor: "#2e7d32"    # Success green
-    backgroundColor: "#f8f9fa"   # Clean professional background
-    cardElevation: 4             # Premium elevation
-    borderRadius: 12             # Smooth, modern corners
-    
-  branding:
-    companyName: "British Airways Executive Leadership"
-    companyLogo: "/ba-executive-logo.png"
-    motto: "Strategic oversight for digital excellence"
-    
-  notifications:
-    enabled: true
-    executiveMode: true
-    channels:
-      - slack
-      - email
-      - executive-report
-    alertTypes:
-      - major_incident
-      - budget_alert
-      - business_impact
-      - strategic_milestone
-      
-  executive:
-    dashboard: true
-    features:
-      showKPIs: true
-      showTrends: true
-      showSummariesOnly: true
-      hideDetailedMetrics: true
-      
-  reporting:
-    enabled: true
-    frequency: "weekly"
-    recipients:
-      - "executive-team@ba.com"
-      - "board@ba.com"
-    format: "pdf"
+    primaryColor: "#1a237e"        # Executive Deep Blue
+    secondaryColor: "#ffc107"      # Gold accent
+    backgroundColor: "#f8f9fa"     # Clean light background
+    cardElevation: 4               # Higher elevation for executive prominence
+    borderRadius: 12               # More rounded for modern executive look
+
+  content:
+    welcome:
+      title: "Welcome to BA Executive Dashboard!"
+      message: |
+        📊 Welcome to BA Executive Dashboard!
+        
+        Your strategic command center for business intelligence and performance oversight.
+        
+        🎯 STRATEGIC OVERVIEW
+        • Business performance KPIs and trending
+        • Digital transformation progress tracking
+        • Revenue and customer satisfaction metrics
+        • Investment ROI and budget performance
+        
+        💼 EXECUTIVE INSIGHTS
+        • Real-time business health monitoring
+        • Strategic initiative progress tracking
+        • Risk assessment and mitigation status
+        • Stakeholder and investor reporting
+        
+        🌍 GLOBAL OPERATIONS
+        • Multi-region business performance
+        • International market expansion metrics
+        • Partnership and alliance effectiveness
+        
+        ---
+        "Strategic excellence through digital transformation" - BA Executive Team
+
+    quickActions:
+      - title: "Business Intelligence"
+        icon: "📊"
+        url: "/catalog?filters=tag:analytics"
+        description: "Strategic analytics and BI"
+      - title: "Performance KPIs"
+        icon: "🎯"
+        url: "/catalog?filters=tag:kpi"
+        description: "Key performance indicators"
+      - title: "Revenue Analytics"
+        icon: "💰"
+        url: "/catalog?filters=tag:revenue"
+        description: "Revenue and profitability"
+      - title: "Board Reports"
+        icon: "📋"
+        url: "/docs/executive/reports"
+        description: "Executive reporting"

@@ -1,135 +1,120 @@
+# BA Security Dashboard Configuration
 apiVersion: backstage.io/v1beta1
 kind: DashboardConfig
 metadata:
   name: ba-security-dashboard
-  title: BA Security Operations Center
-  subtitle: Security Monitoring and Compliance
+  title: "BA Security Operations Center"
+  subtitle: "Security monitoring and compliance oversight"
   version: "1.0.0"
+  namespace: ba-security
   author: "British Airways Security Team"
-  
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/Portfolio-jaime/backstage-dashboard-templates/blob/main/templates/ba-security-dashboard/config.yaml
+    backstage.io/created-by: security-team@ba.com
+    backstage.io/last-updated: "2025-01-15T10:30:00Z"
+
 spec:
   widgets:
-    # Core security widgets - DISABLED until real API available
-    security:
-      enabled: false
-      reason: "No real security API available - showing catalog and GitHub only"
-      refreshInterval: 60000
-      alertThreshold: "medium"
-      title: "Security Alerts Dashboard"
-      showCritical: true
-      showMedium: true
-      showLow: false
-      
-    systemHealth:
-      enabled: false
-      reason: "No real health API available"
-      refreshInterval: 30000
-      title: "Security System Status"
-      securityFocus: true
-      
+    github:
+      enabled: true
+      refreshInterval: 300000 # 5 minutes
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      filters:
+        keywords: ["security", "vulnerability", "scanning", "compliance", "audit", "penetration", "threat", "detection", "auth", "authorization", "authentication", "encryption", "ssl", "tls", "certificates", "secrets", "vault", "siem"]
+        topics: ["security", "vulnerability-scanning", "compliance", "audit", "threat-detection", "authentication", "authorization", "encryption", "security-tools", "cybersecurity", "infosec"]
+        exclude: ["archived", "private", "fork", "demo"]
+        sortBy: "updated"
+        maxRepos: 12
+      maxEvents: 15
+    
     catalog:
       enabled: true
-      refreshInterval: 300000
-      maxServices: 8
-      title: "Security-Critical Services"
-      securityFocus: true
+      refreshInterval: 120000 # 2 minutes
+      maxServices: 12
+      title: "Security Services & Tools"
       filters:
-        tags: ["security", "compliance", "auth", "encryption", "monitoring", "audit"]
-        kinds: ["Component", "API", "Resource"]
-        types: ["service", "library", "tool"]
-        labels:
-          - "security.ba.com/critical"
-          - "compliance.ba.com/required"
+        kinds: ["Component", "API", "Resource", "System"]
+        types: ["security-tool", "scanner", "auth-service", "compliance-tool"]
+        tags: ["security", "compliance", "audit", "vulnerability", "authentication"]
       displayOptions:
-        showSecurityMetrics: true
-        showComplianceStatus: true
-        showVulnerabilities: true
-        hideNonSecurityServices: true
-      
+        showHealthMetrics: true
+        showSecurityStatus: true
+        showByCategory: true
+    
     worldClock:
       enabled: true
       refreshInterval: 1000
-      title: "Global Security Operations"
+      title: "Security Operations Centers"
       timezones:
         - name: "London SOC"
           timezone: "Europe/London"
           flag: "🇬🇧"
+          primary: true
+        - name: "Washington DC"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
         - name: "Singapore SOC"
           timezone: "Asia/Singapore"
           flag: "🇸🇬"
-        - name: "New York SOC"
-          timezone: "America/New_York"
-          flag: "🇺🇸"
-        - name: "Sydney SOC"
-          timezone: "Australia/Sydney"
-          flag: "🇦🇺"
-          
-    # Security-focused GitHub monitoring
-    github:
-      enabled: true
-      refreshInterval: 180000
-      maxEvents: 8
-      title: "Security Repository Activity"
-      dynamicRepos: true
-      owner: "Portfolio-jaime"
-      filters:
-        keywords: ["security", "compliance", "audit", "scan", "vulnerability", "cve", "sast", "dast", "secrets", "auth"]
-        topics: ["security", "compliance", "scanning", "monitoring", "vulnerability-scanner", "security-tools"]
-        exclude: ["archived", "private"]
-        sortBy: "updated"
-        maxRepos: 6
-        securityFocused: true
-        
-    # Disabled non-security widgets
+    
+    # Disabled widgets - Security focuses on security-specific data
     flightOps:
       enabled: false
-      
+      reason: "Security dashboard focuses on cybersecurity, not flight operations"
     costDashboard:
       enabled: false
-      
-  layout:
-    grid:
-      columns: 12
-      spacing: 2  # Tighter spacing for security dashboard
-    positions:
-      search: { xs: 12 }
-      welcome: { xs: 12, md: 8 }
-      worldClock: { xs: 12, md: 4 }
-      security: { xs: 12 }
-      systemHealth: { xs: 12, md: 8 }
-      github: { xs: 12, md: 4 }
-      catalog: { xs: 12 }
-      
+      reason: "Cost management handled by dedicated management dashboard"
+    systemHealth:
+      enabled: false
+      reason: "System health handled by platform dashboard"
+
   theme:
-    primaryColor: "#d32f2f"      # Red for security/alerts
-    secondaryColor: "#ff9800"    # Orange for warnings
-    backgroundColor: "#fafafa"   # Light background for readability
-    cardElevation: 3             # Higher elevation for security importance
-    borderRadius: 6
-    
-  branding:
-    companyName: "British Airways Security Operations"
-    companyLogo: "/ba-security-logo.png"
-    motto: "Vigilance in every byte, security in every flight"
-    
-  notifications:
-    enabled: true
-    urgentMode: true
-    channels:
-      - slack
-      - email
-      - pagerduty
-    alertTypes:
-      - security_incident
-      - compliance_violation
-      - system_breach
-      - vulnerability_detected
-      
-  security:
-    classification: "restricted"
-    accessControl:
-      requireMFA: true
-      allowedRoles:
-        - "security-team"
-        - "soc-analyst"
-        - "security-manager"
+    primaryColor: "#d32f2f"        # Security Red
+    secondaryColor: "#ff6f00"      # Orange for warnings
+    backgroundColor: "#ffebee"     # Light red background
+
+  content:
+    welcome:
+      title: "Welcome to BA Security Operations Center!"
+      message: |
+        🔒 Welcome to BA Security Operations Center!
+        
+        Your command center for cybersecurity monitoring, threat detection, and compliance oversight.
+        
+        🛡️ SECURITY MONITORING
+        • Real-time threat detection and response
+        • Vulnerability assessment and management
+        • Security incident monitoring and analysis
+        • Identity and access management oversight
+        
+        📋 COMPLIANCE & GOVERNANCE
+        • Regulatory compliance monitoring (GDPR, PCI-DSS)
+        • Security policy enforcement
+        • Audit trail management and reporting
+        
+        🚨 INCIDENT RESPONSE
+        • 24/7 security operations center monitoring
+        • Automated incident detection and alerting
+        • Incident response playbook execution
+        
+        ---
+        "Protecting digital skies with vigilant security" - BA Security Team
+
+    quickActions:
+      - title: "Security Dashboard"
+        icon: "🔒"
+        url: "/catalog?filters=tag:security"
+        description: "Security tools overview"
+      - title: "Vulnerability Scans"
+        icon: "🔍"
+        url: "/catalog?filters=tag:vulnerability"
+        description: "Vulnerability reports"
+      - title: "Compliance Status"
+        icon: "📋"
+        url: "/catalog?filters=tag:compliance"
+        description: "Compliance monitoring"
+      - title: "Incident Response"
+        icon: "🚨"
+        url: "/docs/security/incidents"
+        description: "Security incidents"

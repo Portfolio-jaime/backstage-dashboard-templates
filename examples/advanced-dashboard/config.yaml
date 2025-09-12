@@ -1,0 +1,373 @@
+# Advanced Dashboard Example
+# This demonstrates all available features and configuration options
+
+apiVersion: backstage.io/v1beta1
+kind: DashboardConfig
+metadata:
+  name: advanced-example-dashboard
+  title: "Advanced Dashboard Example"
+  subtitle: "Comprehensive configuration showing all features"
+  version: "2.0.0"
+  author: "Dashboard Team <dashboards@ba.com>"
+  namespace: advanced-example
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/Portfolio-jaime/backstage-dashboard-templates/blob/main/examples/advanced-dashboard/config.yaml
+    backstage.io/created-by: dashboards@ba.com
+    backstage.io/last-updated: "2025-01-15T10:30:00Z"
+    example.io/complexity: "advanced"
+    example.io/target-audience: "power-users"
+
+spec:
+  widgets:
+    # Comprehensive GitHub configuration
+    github:
+      enabled: true
+      refreshInterval: 300000  # 5 minutes
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      maxEvents: 12
+      
+      filters:
+        # Multiple keyword filters
+        keywords: 
+          - "backstage"
+          - "kubernetes"
+          - "terraform"
+          - "microservice"
+          - "api"
+          - "dashboard"
+        
+        # Topic-based filtering
+        topics:
+          - "backstage"
+          - "kubernetes"
+          - "devops"
+          - "microservices"
+          - "infrastructure"
+          - "monitoring"
+        
+        # Advanced exclusion patterns
+        exclude:
+          - "archived"
+          - "private"
+          - "fork"
+          - "test"
+          - "demo"
+          - "deprecated"
+          - "legacy"
+        
+        # Sorting and limits
+        sortBy: "updated"
+        maxRepos: 15
+        
+      # API configuration
+      apiConfig:
+        usePublicApi: true
+        rateLimit: 5000
+        timeout: 10000
+
+    # Comprehensive catalog configuration  
+    catalog:
+      enabled: true
+      refreshInterval: 120000  # 2 minutes
+      maxServices: 20
+      title: "Advanced Service Catalog"
+      
+      filters:
+        kinds: ["Component", "API", "Resource", "System"]
+        types: ["service", "library", "tool", "infrastructure", "api", "database"]
+        tags: ["production", "critical", "service", "api", "platform", "security"]
+        labels:
+          - "ba.com/critical"
+          - "ba.com/production"
+          - "ba.com/tier-1"
+      
+      displayOptions:
+        showOverview: true
+        showMetrics: true
+        showHealthStatus: true
+        showByCategory: true
+        showUptime: true
+        showResponseTime: true
+
+    # Comprehensive world clock
+    worldClock:
+      enabled: true
+      refreshInterval: 1000
+      title: "Global Operations Center"
+      
+      timezones:
+        # Europe
+        - name: "London HQ"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+          primary: true
+        - name: "Madrid Hub"
+          timezone: "Europe/Madrid"
+          flag: "🇪🇸"
+        - name: "Amsterdam"
+          timezone: "Europe/Amsterdam"
+          flag: "🇳🇱"
+        - name: "Frankfurt"
+          timezone: "Europe/Berlin"
+          flag: "🇩🇪"
+        
+        # Americas
+        - name: "New York"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+        - name: "Los Angeles"
+          timezone: "America/Los_Angeles"
+          flag: "🇺🇸"
+        - name: "Chicago"
+          timezone: "America/Chicago"
+          flag: "🇺🇸"
+        - name: "São Paulo"
+          timezone: "America/Sao_Paulo"
+          flag: "🇧🇷"
+        - name: "Mexico City"
+          timezone: "America/Mexico_City"
+          flag: "🇲🇽"
+        
+        # Asia Pacific
+        - name: "Singapore"
+          timezone: "Asia/Singapore"
+          flag: "🇸🇬"
+        - name: "Tokyo"
+          timezone: "Asia/Tokyo"
+          flag: "🇯🇵"
+        - name: "Sydney"
+          timezone: "Australia/Sydney"
+          flag: "🇦🇺"
+        - name: "Mumbai"
+          timezone: "Asia/Kolkata"
+          flag: "🇮🇳"
+        - name: "Hong Kong"
+          timezone: "Asia/Hong_Kong"
+          flag: "🇭🇰"
+        
+      displayOptions:
+        format24Hour: true
+        showSeconds: true
+        showDate: true
+        showTimezone: true
+
+    # Disabled widgets with explanations
+    flightOps:
+      enabled: false
+      reason: "No real flight operations API available - would require integration with airline systems"
+      
+    costDashboard:
+      enabled: false
+      reason: "No real cost management API available - would require integration with cloud billing APIs"
+      
+    security:
+      enabled: false
+      reason: "Use dedicated Security dashboard for security information"
+      
+    systemHealth:
+      enabled: false
+      reason: "No real system health API available - would require integration with monitoring systems"
+
+  layout:
+    grid:
+      columns: 12
+      spacing: 3
+      responsive: true
+    
+    # Detailed positioning for all widgets
+    positions:
+      search:
+        xs: 12
+        priority: 1
+      welcome:
+        xs: 12
+        md: 8
+        priority: 2
+      worldClock:
+        xs: 12
+        md: 4
+        priority: 3
+      github:
+        xs: 12
+        lg: 8
+        priority: 4
+      catalog:
+        xs: 12
+        lg: 4
+        priority: 5
+      quickActions:
+        xs: 12
+        md: 6
+        priority: 6
+      additionalInfo:
+        xs: 12
+        md: 6
+        priority: 7
+
+  # Advanced theming
+  theme:
+    primaryColor: "#1976d2"      # Material Blue
+    secondaryColor: "#ff9800"    # Material Orange
+    backgroundColor: "#f5f5f5"   # Light grey background
+    surfaceColor: "#ffffff"      # White surface
+    errorColor: "#f44336"        # Material Red
+    warningColor: "#ff9800"      # Material Orange
+    successColor: "#4caf50"      # Material Green
+    cardElevation: 3             # Higher elevation for depth
+    borderRadius: 12             # Rounded corners
+    fontFamily: "Roboto, 'Helvetica Neue', Arial, sans-serif"
+
+  # Comprehensive branding
+  branding:
+    companyName: "British Airways Digital Operations"
+    companyLogo: "/static/ba-logo-advanced.png"
+    motto: "Advanced operations through intelligent dashboards"
+    
+    colors:
+      primary: "#1976d2"
+      accent: "#ff9800"
+      
+    links:
+      website: "https://www.britishairways.com"
+      support: "https://support.ba.com/dashboards"
+      documentation: "https://docs.ba.com/dashboards/advanced"
+
+  # Rich content configuration
+  content:
+    welcome:
+      title: "Welcome to Advanced Dashboard Operations!"
+      message: |
+        🚀 Welcome to the Advanced Dashboard Operations Center!
+        
+        This comprehensive dashboard demonstrates the full capabilities of our dynamic configuration system.
+        
+        🎯 ADVANCED FEATURES DEMONSTRATED
+        • Comprehensive GitHub integration with advanced filtering
+        • Extended service catalog with detailed metrics
+        • Global timezone coverage for worldwide operations
+        • Rich content management with custom actions
+        • Advanced theming and branding options
+        • Detailed layout control and positioning
+        
+        📊 OPERATIONAL INTELLIGENCE
+        • Real-time repository activity monitoring across multiple projects
+        • Complete service catalog with health status and performance metrics
+        • Global time coordination for distributed teams
+        • Intelligent filtering and categorization
+        • Performance optimized refresh intervals
+        
+        🔧 CONFIGURATION CAPABILITIES
+        • Dynamic repository discovery based on topics and keywords
+        • Granular service filtering by kinds, types, and labels
+        • Customizable timezone displays for global operations
+        • Comprehensive theming system with Material Design
+        • Advanced notification and alerting configuration
+        
+        🌍 GLOBAL SCALE OPERATIONS
+        Monitor and coordinate activities across multiple continents and time zones.
+        This dashboard provides the operational intelligence needed for large-scale,
+        distributed engineering organizations.
+        
+        ⚡ PERFORMANCE OPTIMIZED
+        Configured with intelligent refresh intervals, efficient data loading,
+        and optimized rendering for responsive user experience.
+        
+        ---
+        "Excellence through intelligent automation" - Advanced Operations Team
+
+    quickActions:
+      - title: "Advanced Catalog"
+        icon: "🔍"
+        url: "/catalog?filters=advanced"
+        description: "Advanced service catalog with filters"
+        external: false
+        
+      - title: "Performance Monitoring"
+        icon: "📈"
+        url: "/catalog?filters=tag:monitoring"
+        description: "Monitor system performance"
+        external: false
+        
+      - title: "API Documentation"
+        icon: "📚"
+        url: "/docs/api"
+        description: "Comprehensive API documentation"
+        external: false
+        
+      - title: "Infrastructure Console"
+        icon: "⚙️"
+        url: "/catalog?filters=kind:resource"
+        description: "Manage infrastructure resources"
+        external: false
+        
+      - title: "Security Center"
+        icon: "🔒"
+        url: "/security"
+        description: "Security monitoring and compliance"
+        external: false
+        
+      - title: "Operations Runbook"
+        icon: "📋"
+        url: "/docs/operations"
+        description: "Operational procedures and guidelines"
+        external: false
+        
+      - title: "Global Settings"
+        icon: "🌍"
+        url: "/settings"
+        description: "Configure global preferences"
+        external: false
+        
+      - title: "Support Portal"
+        icon: "💬"
+        url: "https://support.ba.com"
+        description: "Get help and support"
+        external: true
+
+  # Advanced notification configuration
+  notifications:
+    enabled: true
+    
+    channels:
+      slack:
+        webhook: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
+        channel: "#advanced-dashboard-alerts"
+        username: "Advanced Dashboard Bot"
+        
+      email:
+        smtp: "smtp.ba.com"
+        recipients: 
+          - "advanced-ops@ba.com"
+          - "dashboard-admins@ba.com"
+          - "on-call@ba.com"
+        from: "dashboards@ba.com"
+        
+      teams:
+        webhook: "https://outlook.office.com/webhook/YOUR/TEAMS/WEBHOOK"
+        
+    alertThresholds:
+      systemHealth: 90          # Higher threshold for advanced monitoring
+      costBudget: 85            # More sensitive cost monitoring
+      securityAlerts: 1         # Alert on any security issue
+      deploymentFailure: 1      # Alert on any deployment failure
+      apiResponseTime: 500      # Alert if API response > 500ms
+      
+    alertTypes:
+      - critical_system
+      - security_alert  
+      - cost_anomaly
+      - deployment_failure
+      - performance_degradation
+      - service_unavailable
+      - configuration_error
+      - rate_limit_exceeded
+
+  # Custom metadata for advanced use cases
+  customMetadata:
+    complexity: "advanced"
+    targetAudience: "senior-engineers"
+    maintenanceWindow: "Sunday 02:00-04:00 UTC"
+    supportTeam: "Advanced Operations"
+    documentationLevel: "comprehensive"
+    monitoringLevel: "detailed"

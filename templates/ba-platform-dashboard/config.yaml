@@ -2,10 +2,15 @@ apiVersion: backstage.io/v1beta1
 kind: DashboardConfig
 metadata:
   name: ba-platform-dashboard
-  title: BA Platform Engineering
-  subtitle: Infrastructure and Platform Monitoring
+  title: "BA Platform Engineering Hub"
+  subtitle: "Infrastructure and platform services monitoring"
   version: "1.0.0"
+  namespace: ba-platform
   author: "British Airways Platform Team"
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/Portfolio-jaime/backstage-dashboard-templates/blob/main/templates/ba-platform-dashboard/config.yaml
+    backstage.io/created-by: platform-team@ba.com
+    backstage.io/last-updated: "2025-01-15T10:30:00Z"
   
 spec:
   widgets:
@@ -60,8 +65,8 @@ spec:
       dynamicRepos: true
       owner: "Portfolio-jaime"
       filters:
-        keywords: ["k8s", "cluster", "terraform", "infrastructure", "platform", "helm", "crossplane", "argocd", "istio", "monitoring"]
-        topics: ["kubernetes", "terraform", "infrastructure", "platform", "helm", "devops", "cloud-native", "gitops"]
+        keywords: ["platform", "infrastructure", "k8s", "kubernetes", "helm", "istio", "ingress", "cluster", "networking", "storage", "database", "redis", "postgres", "monitoring", "observability", "service-mesh", "crossplane", "operator"]
+        topics: ["platform-engineering", "kubernetes", "infrastructure", "helm", "istio", "service-mesh", "observability", "cloud-native", "microservices-platform", "operators"]
         exclude: ["archived", "private"]
         sortBy: "updated"
         maxRepos: 10
@@ -101,9 +106,65 @@ spec:
     borderRadius: 8
     
   branding:
-    companyName: "British Airways Platform Team"
-    companyLogo: "/ba-logo.png"
-    motto: "Building the foundation for digital aviation"
+    companyName: "British Airways Platform Engineering"
+    companyLogo: "/static/ba-platform-logo.png"
+    motto: "Building the foundation for digital excellence"
+    colors:
+      primary: "#2e7d32"
+      accent: "#ff6f00"
+
+  content:
+    welcome:
+      title: "Welcome to BA Platform Engineering Hub!"
+      message: |
+        ⚙️ Welcome to BA Platform Engineering Hub!
+        
+        Your central command center for infrastructure and platform services that power BA's digital ecosystem.
+        
+        🏗️ PLATFORM FOUNDATIONS
+        • Kubernetes clusters and orchestration
+        • Service mesh and networking infrastructure  
+        • Database and storage platforms
+        • Monitoring and observability stack
+        • Developer platform and tooling
+        
+        🔧 INFRASTRUCTURE SERVICES
+        • Multi-cloud infrastructure management
+        • Container orchestration and scaling
+        • Service discovery and load balancing
+        • Data platform and messaging systems
+        • Security and compliance frameworks
+        
+        📊 PLATFORM OPERATIONS
+        • Infrastructure health and performance monitoring
+        • Capacity planning and resource optimization  
+        • Platform reliability and SLA management
+        • Developer experience and self-service tools
+        
+        🌍 GLOBAL PLATFORM
+        Managing infrastructure across multiple regions to ensure high availability,
+        low latency, and compliance with local regulations.
+        
+        ---
+        "Building the foundation for digital excellence" - BA Platform Team
+
+    quickActions:
+      - title: "Kubernetes Console"
+        icon: "☸️"
+        url: "/catalog?filters=tag:kubernetes"
+        description: "Manage K8s clusters"
+      - title: "Infrastructure Catalog"
+        icon: "🏗️"
+        url: "/catalog?filters=kind:resource"
+        description: "Browse infrastructure"
+      - title: "Platform Metrics"
+        icon: "📊"
+        url: "/catalog?filters=tag:monitoring"
+        description: "Platform performance"
+      - title: "Database Services"
+        icon: "🗄️"
+        url: "/catalog?filters=tag:database"
+        description: "Manage databases"
     
   notifications:
     enabled: true

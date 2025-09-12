@@ -1,0 +1,65 @@
+# Minimal Dashboard Example
+# This is the simplest possible dashboard configuration
+
+apiVersion: backstage.io/v1beta1
+kind: DashboardConfig
+metadata:
+  name: minimal-example-dashboard
+  title: "Minimal Dashboard Example"
+  subtitle: "Simplest possible configuration"
+  version: "1.0.0"
+  author: "Dashboard Team <dashboards@ba.com>"
+
+spec:
+  widgets:
+    # Only enable essential widgets
+    catalog:
+      enabled: true
+      refreshInterval: 120000
+      maxServices: 5
+      
+    # Disable all other widgets
+    github:
+      enabled: false
+      reason: "Not needed for minimal example"
+    worldClock:
+      enabled: false
+      reason: "Not needed for minimal example"
+    flightOps:
+      enabled: false
+      reason: "No real API available"
+    costDashboard:
+      enabled: false
+      reason: "No real API available"
+    security:
+      enabled: false
+      reason: "No real API available"
+    systemHealth:
+      enabled: false
+      reason: "No real API available"
+
+  layout:
+    grid:
+      columns: 12
+      spacing: 3
+
+  theme:
+    primaryColor: "#1976d2"
+    secondaryColor: "#ff9800"
+    backgroundColor: "#f5f5f5"
+    cardElevation: 2
+    borderRadius: 8
+
+  content:
+    welcome:
+      title: "Welcome to Minimal Dashboard!"
+      message: |
+        This is a minimal dashboard example showing only essential components.
+        
+        Perfect for getting started or for simple use cases.
+
+    quickActions:
+      - title: "Service Catalog"
+        icon: "📊"
+        url: "/catalog"
+        description: "Browse all services"

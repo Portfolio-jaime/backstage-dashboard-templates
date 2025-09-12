@@ -20,8 +20,8 @@ spec:
       dynamicRepos: true
       owner: "Portfolio-jaime"
       filters:
-        keywords: ["backstage", "devops", "k8s", "go", "terraform", "gitops", "cluster", "eks"]
-        topics: ["backstage", "devops", "kubernetes", "go", "terraform", "gitops"]
+        keywords: ["devops", "ci-cd", "pipeline", "deployment", "k8s", "kubernetes", "terraform", "ansible", "jenkins", "github-actions", "docker", "helm", "gitops", "argocd", "monitoring", "prometheus", "grafana"]
+        topics: ["devops", "ci-cd", "kubernetes", "terraform", "gitops", "monitoring", "automation", "infrastructure", "deployment", "containerization"]
         exclude: ["archived", "private"]
         sortBy: "updated"
         maxRepos: 8
@@ -33,13 +33,21 @@ spec:
     catalog:
       enabled: true
       refreshInterval: 120000 # 2 minutes
-      maxServices: 8
+      maxServices: 10
+      title: "DevOps Services & Infrastructure"
       filters:
-        kinds: ["Component", "API", "Resource"]
+        kinds: ["Component", "API", "Resource", "System"]
+        types: ["service", "infrastructure", "tool", "pipeline", "deployment"]
+        tags: ["devops", "ci-cd", "deployment", "monitoring", "infrastructure"]
+        labels:
+          - "devops.ba.com/managed"
+          - "deployment.ba.com/active"
       displayOptions:
         showHealthMetrics: true
         showUptime: true
         showResponseTime: true
+        showByCategory: true
+        showOverview: true
     
     # Disabled simulated widgets - DevOps dashboard focuses on real data
     flightOps:
