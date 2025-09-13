@@ -133,28 +133,93 @@ spec:
         priority: 11
 
   theme:
-    primaryColor: "#1976d2"
-    secondaryColor: "#ff9800"
-    # Light theme colors
-    light:
-      backgroundColor: "#f5f5f5"
-      surfaceColor: "#ffffff"
-      textColor: "#333333"
-      cardBackground: "#ffffff"
-      borderColor: "#e0e0e0"
-    # Dark theme colors  
-    dark:
-      backgroundColor: "#121212"
-      surfaceColor: "#1e1e1e"
-      textColor: "#ffffff"
-      cardBackground: "#2d2d2d"
-      borderColor: "#404040"
+    # Tema por defecto
+    default:
+      primaryColor: "#1976d2"
+      secondaryColor: "#ff9800"
+      light:
+        backgroundColor: "#f5f5f5"
+        surfaceColor: "#ffffff"
+        textColor: "#333333"
+        cardBackground: "#ffffff"
+        borderColor: "#e0e0e0"
+      dark:
+        backgroundColor: "#121212"
+        surfaceColor: "#1e1e1e"
+        textColor: "#ffffff"
+        cardBackground: "#2d2d2d"
+        borderColor: "#404040"
+    
+    # Temas disponibles para DevOps Dashboard
+    availableThemes:
+      - id: "devops-terminal"
+        name: "DevOps Terminal"
+        description: "Tema oscuro inspirado en terminales para DevOps"
+        type: "dark"
+        colors:
+          primary: "#00d9ff"
+          secondary: "#ff6b35"
+          background: "#0a0a0a"
+          surface: "#1a1a2e"
+          text: "#eee6e6"
+          card: "#16213e"
+          border: "#0f3460"
+          accent: "#00ff88"
+          success: "#00ff88"
+          warning: "#ffaa00"
+          error: "#ff3333"
+        category: "dashboard-specific"
+        
+      - id: "devops-matrix"
+        name: "DevOps Matrix"
+        description: "Tema verde matrix para operaciones DevOps"
+        type: "dark"
+        colors:
+          primary: "#00ff41"
+          secondary: "#ff0080"
+          background: "#001100"
+          surface: "#003300"
+          text: "#00ff41"
+          card: "#002200"
+          border: "#004400"
+          accent: "#00ccff"
+          success: "#00ff41"
+          warning: "#ffff00"
+          error: "#ff0000"
+        category: "dashboard-specific"
+        
+      - id: "devops-classic-light"
+        name: "DevOps Classic Light"
+        description: "Tema claro clásico para DevOps"
+        type: "light"
+        colors:
+          primary: "#1976d2"
+          secondary: "#ff9800"
+          background: "#f5f5f5"
+          surface: "#ffffff"
+          text: "#333333"
+          card: "#ffffff"
+          border: "#e0e0e0"
+          accent: "#00bcd4"
+          success: "#4caf50"
+          warning: "#ff9800"
+          error: "#f44336"
+        category: "dashboard-specific"
+    
+    # Configuración global
     errorColor: "#f44336"
     warningColor: "#ff9800"
     successColor: "#4caf50"
     cardElevation: 2
     borderRadius: 8
     fontFamily: "Roboto, sans-serif"
+    
+    # Configuración de selector de temas
+    themeSelector:
+      enabled: true
+      allowUserCustomization: true
+      autoSwitchByDashboard: true
+      position: "dashboard-header" # "sidebar", "dashboard-header", "preferences"
 
   branding:
     companyName: "British Airways"
