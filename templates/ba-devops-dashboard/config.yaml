@@ -78,10 +78,39 @@ spec:
       filters:
         tags: ["security", "vulnerability", "compliance"]
     
-    # No world clock in specialized dashboards
+    # World clock with South American timezones for BA DevOps operations
     worldClock:
-      enabled: false
-      reason: "World clock only shown on main dashboard"
+      enabled: true
+      refreshInterval: 1000
+      title: "Global DevOps Operations Time"
+      timezones:
+        # British Airways Operations Centers
+        - name: "London HQ"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+          primary: true
+
+        # South American Operations (per your requirements)
+        - name: "Bogotá"
+          timezone: "America/Bogota"
+          flag: "🇨🇴"
+        - name: "Santiago"
+          timezone: "America/Santiago"
+          flag: "🇨🇱"
+        - name: "Buenos Aires"
+          timezone: "America/Argentina/Buenos_Aires"
+          flag: "🇦🇷"
+        - name: "Montevideo"
+          timezone: "America/Montevideo"
+          flag: "🇺🇾"
+
+        # Additional BA Operations
+        - name: "New York"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+        - name: "Dubai"
+          timezone: "Asia/Dubai"
+          flag: "🇦🇪"
 
   layout:
     grid:
