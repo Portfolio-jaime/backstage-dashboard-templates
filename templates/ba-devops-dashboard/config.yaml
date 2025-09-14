@@ -98,40 +98,27 @@ spec:
         showByCategory: true
         showOverview: true
     
-    # DevOps specific widgets - Focus on CI/CD and deployments
+    # Disable simulated/mock widgets for clean DevOps dashboard
     systemHealth:
-      enabled: true
-      refreshInterval: 30000
-      title: "DevOps System Health"
-      showOverview: true
-      filters:
-        tags: ["deployment", "pipeline", "monitoring"]
-        
+      enabled: false
+      reason: "Mock data - disabled for clean production dashboard"
+
     flightOps:
       enabled: false
       reason: "Not relevant for DevOps operations"
-    
+
     costDashboard:
-      enabled: true
-      refreshInterval: 300000
-      title: "Infrastructure Costs"
-      showOverview: true
-      filters:
-        tags: ["infrastructure", "deployment", "cloud"]
-    
+      enabled: false
+      reason: "Mock data - disabled for clean production dashboard"
+
     security:
-      enabled: true
-      refreshInterval: 180000
-      title: "DevOps Security Alerts"
-      showOverview: true
-      filters:
-        tags: ["security", "vulnerability", "compliance"]
-    
-    # World clock with South American timezones for BA DevOps operations
+      enabled: false
+      reason: "Mock data - disabled for clean production dashboard"
+
+    # World clock disabled per user request
     worldClock:
-      enabled: true
-      refreshInterval: 1000
-      title: "Global DevOps Operations Time"
+      enabled: false
+      reason: "Disabled per user request to clean up dashboard"
       timezones:
         # British Airways Operations Centers
         - name: "London HQ"
@@ -164,7 +151,7 @@ spec:
   layout:
     grid:
       columns: 12
-      spacing: 3
+      spacing: 2
       responsive: true
     positions:
       search:
@@ -172,43 +159,23 @@ spec:
         priority: 1
       welcome:
         xs: 12
-        md: 8
+        md: 6
         priority: 2
-      worldClock:
+      teamInfo:
         xs: 12
-        md: 4
+        md: 6
         priority: 3
-      flightOps:
+      github:
         xs: 12
-        lg: 8
+        md: 6
         priority: 4
-      security:
-        xs: 12
-        lg: 4
-        priority: 5
-      systemHealth:
-        xs: 12
-        priority: 6
-      costDashboard:
-        xs: 12
-        md: 8
-        priority: 7
-      teamActivity:
-        xs: 12
-        md: 4
-        priority: 8
       catalog:
         xs: 12
         md: 6
-        priority: 9
+        priority: 5
       quickActions:
         xs: 12
-        md: 3
-        priority: 10
-      joke:
-        xs: 12
-        md: 3
-        priority: 11
+        priority: 6
 
   theme:
     # Tema por defecto
@@ -309,35 +276,13 @@ spec:
 
   content:
     welcome:
-      title: "Welcome to BA DevOps Command Center!"
+      title: "DevOps Command Center"
       message: |
-        🚀 Welcome to BA DevOps Command Center!
-        
-        Your mission control for all development operations and deployments across BA's digital infrastructure.
-        
-        🔄 CONTINUOUS OPERATIONS
-        • Monitor CI/CD pipelines and deployment status
-        • Track system health and performance metrics
-        • Automate infrastructure provisioning and scaling
-        • Ensure high availability across all environments
-        
-        🛠️ DEVOPS TOOLKIT
-        • GitHub repositories and code activity
-        • System health monitoring and alerts  
-        • Service catalog with deployment status
-        • Global time coordination for releases
-        
-        🎯 KEY RESPONSIBILITIES
-        • Deployment orchestration and rollbacks
-        • Infrastructure as Code management
-        • Monitoring and observability setup
-        • Incident response and recovery procedures
-        
-        ⚡ OPERATIONAL EXCELLENCE
-        Ready to deploy with confidence? Monitor your pipelines, track deployments, and ensure BA's digital services fly smoothly around the globe.
-        
-        ---
-        "To fly. To serve. To deploy." - BA DevOps Team
+        🚀 **DevOps Operations Hub**
+
+        Monitor deployments, manage infrastructure, and ensure reliable service delivery across all BA environments.
+
+        **Current Focus**: CI/CD pipeline optimization and service reliability.
 
     quickActions:
       - title: "Deploy Service"
