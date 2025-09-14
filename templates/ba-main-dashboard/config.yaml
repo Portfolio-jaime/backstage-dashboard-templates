@@ -9,47 +9,18 @@ metadata:
   
 spec:
   widgets:
-    # Overview widgets - general information
+    # Disable all service widgets for clean main dashboard
     catalog:
-      enabled: true
-      refreshInterval: 120000
-      maxServices: 20
-      title: "BA Services Overview"
-      showOverview: true
-      filters:
-        # General filters to show all types
-        tags: ["production", "critical", "service", "api", "platform", "security"]
-        kinds: ["Component", "API", "Resource", "System"]
-        types: ["service", "library", "tool", "infrastructure", "api"]
-        labels:
-          - "ba.com/critical"
-          - "ba.com/production"
-      displayOptions:
-        showOverview: true
-        showMetrics: true
-        showHealthStatus: true
-        showByCategory: true
-        
+      enabled: false
+      reason: "Main dashboard shows only navigation, welcome, world clock, and quick actions"
+
     systemHealth:
-      enabled: true
-      refreshInterval: 30000
-      title: "BA Systems Health Overview"
-      showOverview: true
+      enabled: false
+      reason: "Main dashboard shows only navigation, welcome, world clock, and quick actions"
       
     github:
-      enabled: true
-      refreshInterval: 600000
-      maxEvents: 6
-      title: "BA Digital Projects Overview"
-      dynamicRepos: true
-      owner: "Portfolio-jaime" 
-      showOverview: true
-      filters:
-        keywords: ["backstage", "ba", "british-airways", "aviation"]
-        topics: ["backstage", "aviation", "platform"]
-        exclude: ["archived", "private", "test", "demo"]
-        sortBy: "updated"
-        maxRepos: 5
+      enabled: false
+      reason: "Main dashboard shows only navigation, welcome, world clock, and quick actions"
         
     worldClock:
       enabled: true
