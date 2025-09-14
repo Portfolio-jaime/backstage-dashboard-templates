@@ -68,36 +68,105 @@ spec:
       refreshInterval: 300000 # 5 minutes
       dynamicRepos: true
       owner: "Portfolio-jaime"
+      teamFocus: "devops-team"
       filters:
-        keywords: ["backstage", "app", "devops", "ci-cd", "pipeline", "deployment", "python", "go", "k8s", "kubernetes", "terraform", "ansible", "jenkins", "github-actions", "docker", "helm", "gitops", "argocd", "monitoring", "prometheus", "grafana"]
-        topics: ["backstage", "devops", "ci-cd", "kubernetes", "terraform", "gitops", "monitoring", "automation", "infrastructure", "deployment", "containerization", "python", "golang"]
-        exclude: ["archived", "private"]
+        # DevOps Team specific repositories
+        keywords: ["backstage", "devops", "infrastructure", "ci-cd", "pipeline", "deployment", "terraform", "ansible", "kubernetes", "k8s", "docker", "helm", "gitops", "argocd", "monitoring", "prometheus", "grafana", "jenkins", "github-actions", "automation", "platform", "sre", "ops"]
+        topics: ["devops", "ci-cd", "kubernetes", "terraform", "infrastructure", "deployment", "automation", "monitoring", "gitops", "platform-engineering", "sre", "containerization", "pipeline", "backstage-plugin"]
+        # Focus on DevOps team repositories
+        repositories: [
+          "backstage-app-devc",
+          "backstage-dashboard-templates",
+          "kubernetes-manifests",
+          "terraform-infrastructure",
+          "ci-cd-pipelines",
+          "monitoring-stack",
+          "gitops-config"
+        ]
+        exclude: ["archived", "private", "fork"]
         sortBy: "updated"
-        maxRepos: 8
-      maxEvents: 8
+        maxRepos: 6
+        teamOwner: "devops-team"
+      maxEvents: 10
       apiConfig:
         usePublicApi: true
         rateLimit: 5000 # requests per hour
+        teamContext: "devops-operations"
     
     catalog:
       enabled: true
       refreshInterval: 120000 # 2 minutes
-      maxServices: 10
-      title: "DevOps Services & Infrastructure"
+      maxServices: 12
+      title: "DevOps Team - Services & Infrastructure"
+      teamFilter: "devops-team"
       filters:
-        kinds: ["Component", "API", "Resource", "System"]
-        types: ["service", "infrastructure", "tool", "pipeline", "deployment"]
-        tags: ["devops", "ci-cd", "deployment", "monitoring", "infrastructure"]
+        # DevOps Team owned entities
+        kinds: ["Component", "API", "Resource", "System", "Domain"]
+        types: ["service", "infrastructure", "tool", "pipeline", "deployment", "platform", "monitoring-stack"]
+        tags: ["devops", "ci-cd", "deployment", "monitoring", "infrastructure", "platform", "sre", "automation", "gitops"]
         labels:
           - "devops.ba.com/managed"
           - "deployment.ba.com/active"
+          - "team=devops-team"
+          - "owner=devops-team"
+        # Show entities owned by DevOps team members
+        owners: [
+          "jaime.henao@ba.com",
+          "devops1@ba.com",
+          "devops2@ba.com",
+          "devops-team"
+        ]
+        # Focus on DevOps domains
+        domains: ["infrastructure", "platform", "deployment", "monitoring"]
+        # Exclude non-DevOps entities
+        exclude:
+          tags: ["frontend", "mobile", "business-logic", "user-facing"]
+          types: ["website", "mobile-app"]
       displayOptions:
         showHealthMetrics: true
         showUptime: true
         showResponseTime: true
         showByCategory: true
         showOverview: true
-    
+        showOwnership: true
+        groupByDomain: true
+        showLastDeployed: true
+        showPipelineStatus: true
+
+    # TechDocs widget for DevOps team documentation
+    techdocs:
+      enabled: true
+      refreshInterval: 300000 # 5 minutes
+      title: "DevOps Team Documentation"
+      teamFilter: "devops-team"
+      filters:
+        # DevOps specific documentation
+        tags: ["devops", "infrastructure", "deployment", "ci-cd", "monitoring", "platform", "sre"]
+        owners: [
+          "jaime.henao@ba.com",
+          "devops-team",
+          "devops1@ba.com",
+          "devops2@ba.com"
+        ]
+        categories: [
+          "runbooks",
+          "infrastructure",
+          "deployment-guides",
+          "monitoring",
+          "troubleshooting",
+          "platform-docs",
+          "ci-cd-guides"
+        ]
+        exclude:
+          categories: ["business-requirements", "user-guides", "marketing"]
+          tags: ["frontend", "mobile", "business"]
+      displayOptions:
+        maxDocs: 8
+        showLastUpdated: true
+        showOwner: true
+        showTags: true
+        groupByCategory: true
+
     # Disable simulated/mock widgets for clean DevOps dashboard
     systemHealth:
       enabled: false
