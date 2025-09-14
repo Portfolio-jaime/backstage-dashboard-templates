@@ -11,8 +11,57 @@ metadata:
     backstage.io/managed-by-location: url:https://github.com/Portfolio-jaime/backstage-dashboard-templates/blob/main/templates/ba-devops-dashboard/config.yaml
     backstage.io/created-by: jaime.henao@ba.com
     backstage.io/last-updated: "2025-01-15T10:30:00Z"
+    backstage.io/team: devops-team
+  labels:
+    team: devops-team
+    department: engineering
+    focus-area: deployment-operations
 
 spec:
+  # Team-specific information
+  team:
+    name: devops-team
+    displayName: "DevOps Engineering Team"
+    description: "Responsible for CI/CD, infrastructure automation, and deployment operations"
+    lead: "jaime.henao@ba.com"
+    members:
+      - name: "Jaime Henao"
+        role: "Senior DevOps Engineer"
+        email: "jaime.henao@ba.com"
+        expertise: ["Kubernetes", "Terraform", "CI/CD", "Monitoring"]
+      - name: "DevOps Engineer 1"
+        role: "DevOps Engineer"
+        email: "devops1@ba.com"
+        expertise: ["Docker", "Jenkins", "AWS", "GitOps"]
+      - name: "DevOps Engineer 2"
+        role: "Cloud Engineer"
+        email: "devops2@ba.com"
+        expertise: ["Azure", "Infrastructure", "Security", "Automation"]
+    responsibilities:
+      - "CI/CD pipeline management"
+      - "Infrastructure as Code (Terraform)"
+      - "Kubernetes cluster operations"
+      - "Monitoring and alerting setup"
+      - "Deployment automation"
+      - "Security and compliance"
+    tools:
+      - "Kubernetes"
+      - "Terraform"
+      - "Jenkins/GitHub Actions"
+      - "Prometheus/Grafana"
+      - "Docker"
+      - "Helm"
+    metrics:
+      deploymentFrequency: "Multiple times per day"
+      leadTime: "< 1 hour"
+      mttr: "< 30 minutes"
+      changeFailureRate: "< 5%"
+    slackChannel: "#devops-team"
+    confluence: "https://ba.atlassian.net/wiki/spaces/DEVOPS"
+    oncallRotation:
+      current: "jaime.henao@ba.com"
+      schedule: "Weekly rotation"
+
   widgets:
     github:
       enabled: true
