@@ -20,8 +20,8 @@ spec:
       dynamicRepos: true
       owner: "Portfolio-jaime"
       filters:
-        keywords: ["devops", "ci-cd", "pipeline", "deployment", "k8s", "kubernetes", "terraform", "ansible", "jenkins", "github-actions", "docker", "helm", "gitops", "argocd", "monitoring", "prometheus", "grafana"]
-        topics: ["devops", "ci-cd", "kubernetes", "terraform", "gitops", "monitoring", "automation", "infrastructure", "deployment", "containerization"]
+        keywords: ["backstage", "app", "devops", "ci-cd", "pipeline", "deployment", "python", "go", "k8s", "kubernetes", "terraform", "ansible", "jenkins", "github-actions", "docker", "helm", "gitops", "argocd", "monitoring", "prometheus", "grafana"]
+        topics: ["backstage", "devops", "ci-cd", "kubernetes", "terraform", "gitops", "monitoring", "automation", "infrastructure", "deployment", "containerization", "python", "golang"]
         exclude: ["archived", "private"]
         sortBy: "updated"
         maxRepos: 8
