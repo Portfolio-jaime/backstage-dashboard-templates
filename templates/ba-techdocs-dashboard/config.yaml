@@ -1,0 +1,293 @@
+# BA TechDocs Dashboard Configuration
+apiVersion: backstage.io/v1
+kind: DashboardConfig
+metadata:
+  name: ba-techdocs-dashboard
+  title: "BA TechDocs Hub"
+  subtitle: "Documentation and knowledge management center"
+  version: "1.0.0"
+  namespace: ba-techdocs
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/Portfolio-jaime/backstage-dashboard-templates/blob/main/templates/ba-techdocs-dashboard/config.yaml
+    backstage.io/created-by: jaime.henao@ba.com
+    backstage.io/last-updated: "2025-01-15T10:30:00Z"
+
+spec:
+  widgets:
+    # GitHub repositories focused on documentation
+    github:
+      enabled: true
+      refreshInterval: 300000 # 5 minutes
+      dynamicRepos: true
+      owner: "Portfolio-jaime"
+      filters:
+        keywords: ["docs", "documentation", "wiki", "guide", "manual", "readme", "techdocs", "mkdocs", "docusaurus", "gitbook"]
+        topics: ["documentation", "techdocs", "wiki", "guides", "knowledge-base", "handbook", "manual"]
+        exclude: ["archived", "private"]
+        sortBy: "updated"
+        maxRepos: 10
+      maxEvents: 12
+      apiConfig:
+        usePublicApi: true
+        rateLimit: 5000
+
+    # Catalog focused on documentation entities
+    catalog:
+      enabled: true
+      refreshInterval: 120000 # 2 minutes
+      maxServices: 12
+      title: "Documentation & Knowledge Base"
+      filters:
+        kinds: ["Component", "API", "Resource", "Domain", "System"]
+        types: ["documentation", "website", "service", "library"]
+        tags: ["documentation", "techdocs", "api-docs", "guides", "knowledge"]
+        labels:
+          - "docs.ba.com/managed"
+          - "techdocs.ba.com/published"
+      displayOptions:
+        showHealthMetrics: false
+        showUptime: false
+        showResponseTime: false
+        showByCategory: true
+        showOverview: true
+
+    # TechDocs specific widgets
+    systemHealth:
+      enabled: false
+      reason: "Not relevant for documentation dashboard"
+
+    flightOps:
+      enabled: false
+      reason: "Not relevant for documentation dashboard"
+
+    costDashboard:
+      enabled: false
+      reason: "Not relevant for documentation dashboard"
+
+    security:
+      enabled: true
+      refreshInterval: 300000
+      title: "Documentation Security"
+      showOverview: true
+      filters:
+        tags: ["security", "vulnerability", "docs-compliance"]
+
+    # World clock for documentation teams
+    worldClock:
+      enabled: true
+      refreshInterval: 1000
+      title: "Documentation Team Locations"
+      timezones:
+        # Documentation team locations
+        - name: "London Docs"
+          timezone: "Europe/London"
+          flag: "🇬🇧"
+          primary: true
+
+        - name: "Dublin"
+          timezone: "Europe/Dublin"
+          flag: "🇮🇪"
+
+        - name: "New York"
+          timezone: "America/New_York"
+          flag: "🇺🇸"
+
+        - name: "Bangalore"
+          timezone: "Asia/Kolkata"
+          flag: "🇮🇳"
+
+        - name: "Manila"
+          timezone: "Asia/Manila"
+          flag: "🇵🇭"
+
+        - name: "Sydney"
+          timezone: "Australia/Sydney"
+          flag: "🇦🇺"
+
+  layout:
+    grid:
+      columns: 12
+      spacing: 3
+      responsive: true
+    positions:
+      search:
+        xs: 12
+        priority: 1
+      welcome:
+        xs: 12
+        md: 8
+        priority: 2
+      worldClock:
+        xs: 12
+        md: 4
+        priority: 3
+      catalog:
+        xs: 12
+        lg: 8
+        priority: 4
+      security:
+        xs: 12
+        lg: 4
+        priority: 5
+      teamActivity:
+        xs: 12
+        md: 8
+        priority: 6
+      quickActions:
+        xs: 12
+        md: 4
+        priority: 7
+
+  theme:
+    # Documentation theme with purple/blue accents
+    default:
+      primaryColor: "#6f42c1"
+      secondaryColor: "#17a2b8"
+      light:
+        backgroundColor: "#f8f9fa"
+        surfaceColor: "#ffffff"
+        textColor: "#212529"
+        cardBackground: "#ffffff"
+        borderColor: "#dee2e6"
+      dark:
+        backgroundColor: "#1a1a1a"
+        surfaceColor: "#2d2d2d"
+        textColor: "#f8f9fa"
+        cardBackground: "#343a40"
+        borderColor: "#495057"
+
+    availableThemes:
+      - id: "docs-purple"
+        name: "Documentation Purple"
+        description: "Purple theme optimized for documentation"
+        type: "light"
+        colors:
+          primary: "#6f42c1"
+          secondary: "#17a2b8"
+          background: "#f8f9fa"
+          surface: "#ffffff"
+          text: "#212529"
+          card: "#ffffff"
+          border: "#dee2e6"
+          accent: "#20c997"
+          success: "#28a745"
+          warning: "#ffc107"
+          error: "#dc3545"
+        category: "documentation"
+
+      - id: "docs-dark-purple"
+        name: "Documentation Dark"
+        description: "Dark purple theme for documentation teams"
+        type: "dark"
+        colors:
+          primary: "#9575cd"
+          secondary: "#4fc3f7"
+          background: "#1a1a1a"
+          surface: "#2d2d2d"
+          text: "#f8f9fa"
+          card: "#343a40"
+          border: "#495057"
+          accent: "#26a69a"
+          success: "#4caf50"
+          warning: "#ff9800"
+          error: "#f44336"
+        category: "documentation"
+
+    errorColor: "#dc3545"
+    warningColor: "#ffc107"
+    successColor: "#28a745"
+    cardElevation: 2
+    borderRadius: 8
+    fontFamily: "Roboto, sans-serif"
+
+    themeSelector:
+      enabled: true
+      allowUserCustomization: true
+      autoSwitchByDashboard: true
+      position: "dashboard-header"
+
+  branding:
+    companyName: "British Airways"
+    companyLogo: "/static/ba-logo.png"
+    motto: "To fly. To serve. To document."
+    colors:
+      primary: "#6f42c1"
+      accent: "#17a2b8"
+
+  content:
+    welcome:
+      title: "Welcome to BA TechDocs Hub!"
+      message: |
+        📚 Welcome to BA TechDocs Hub!
+
+        Your central location for all documentation, guides, and knowledge management across BA's digital ecosystem.
+
+        📖 DOCUMENTATION CENTER
+        • Browse and search technical documentation
+        • Track documentation health and coverage
+        • Monitor writing and publishing activity
+        • Access API documentation and guides
+
+        ✍️ WRITING & PUBLISHING
+        • Create and edit TechDocs with MkDocs
+        • Collaborate on documentation projects
+        • Track documentation metrics and analytics
+        • Manage documentation workflows
+
+        🔍 KNOWLEDGE DISCOVERY
+        • Search across all documentation sources
+        • Find API references and integration guides
+        • Access architectural decision records
+        • Browse developer handbooks and runbooks
+
+        📊 DOCUMENTATION METRICS
+        • Monitor documentation coverage by team
+        • Track page views and user engagement
+        • Identify gaps in documentation
+        • Measure documentation quality scores
+
+        🌟 BEST PRACTICES
+        Ready to improve BA's documentation? Create clear, comprehensive docs that help teams work more effectively and reduce support overhead.
+
+        ---
+        "To fly. To serve. To document." - BA Documentation Team
+
+    quickActions:
+      - title: "Write New Doc"
+        icon: "📝"
+        url: "/create"
+        description: "Create new documentation"
+      - title: "Browse TechDocs"
+        icon: "📚"
+        url: "/docs"
+        description: "Browse all docs"
+      - title: "API Documentation"
+        icon: "🔧"
+        url: "/catalog?filters=kind:API"
+        description: "API references"
+      - title: "Style Guide"
+        icon: "🎨"
+        url: "/docs/default/component/ba-style-guide"
+        description: "Writing style guide"
+      - title: "Templates"
+        icon: "📄"
+        url: "/create?filters=template:documentation"
+        description: "Doc templates"
+      - title: "Analytics"
+        icon: "📊"
+        url: "/catalog?filters=tag:documentation"
+        description: "Doc analytics"
+
+  notifications:
+    enabled: true
+    channels:
+      slack:
+        webhook: "https://hooks.slack.com/services/..."
+        channel: "#ba-docs-updates"
+      email:
+        smtp: "smtp.ba.com"
+        recipients: ["docs-team@ba.com"]
+    alertThresholds:
+      documentationCoverage: 70
+      outdatedDocs: 30
+      brokenLinks: 1

@@ -1,0 +1,356 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: ba-frontend-template
+  title: BA Frontend Application
+  description: Create a new frontend application with environment-specific deployments
+  tags:
+    - recommended
+    - ba
+    - frontend
+    - web
+    - react
+spec:
+  owner: frontend-team
+  type: website
+
+  parameters:
+    - title: Application Information
+      required:
+        - name
+        - description
+        - app_type
+      properties:
+        name:
+          title: Application Name
+          type: string
+          description: Name of the frontend application
+          pattern: '^[a-z0-9-]+$'
+          ui:autofocus: true
+          ui:help: 'Use lowercase letters, numbers, and hyphens only'
+        description:
+          title: Description
+          type: string
+          description: Brief description of this frontend application
+        app_type:
+          title: Application Type
+          type: string
+          description: What type of frontend application?
+          default: customer-facing
+          enum:
+            - customer-facing
+            - internal-tool
+            - admin-panel
+            - mobile-web
+            - documentation
+          enumNames:
+            - '🌐 Customer-Facing Website'
+            - '🛠️ Internal Tool'
+            - '👨‍💼 Admin Panel'
+            - '📱 Mobile Web App'
+            - '📚 Documentation Site'
+
+    - title: Environment & Deployment
+      required:
+        - environment
+        - framework
+      properties:
+        environment:
+          title: Primary Environment
+          type: string
+          description: Where will this frontend be primarily developed?
+          default: DEV1
+          enum:
+            - PROD1
+            - SIT1
+            - DEV1
+            - PCM
+            - UAT1
+          enumNames:
+            - '🟢 PROD1 - Production (Live Site)'
+            - '🟡 SIT1 - System Integration Testing'
+            - '🟠 DEV1 - Development Environment'
+            - '🔵 PCM - Pre-production Testing'
+            - '🟣 UAT1 - User Acceptance Testing'
+
+        framework:
+          title: Frontend Framework
+          type: string
+          description: Choose your preferred frontend framework
+          default: react
+          enum:
+            - react
+            - angular
+            - vue
+            - nextjs
+            - gatsby
+            - vanilla
+          enumNames:
+            - 'React (Recommended)'
+            - 'Angular'
+            - 'Vue.js'
+            - 'Next.js (React with SSR)'
+            - 'Gatsby (Static Site)'
+            - 'Vanilla JavaScript'
+
+        hosting_platform:
+          title: Hosting Platform
+          type: string
+          description: Where should this be deployed?
+          default: azure-static-web-apps
+          enum:
+            - azure-static-web-apps
+            - azure-app-service
+            - cdn
+            - kubernetes
+            - netlify
+          enumNames:
+            - 'Azure Static Web Apps (Recommended)'
+            - 'Azure App Service'
+            - 'CDN + Storage'
+            - 'Kubernetes'
+            - 'Netlify'
+
+    - title: Technical Configuration
+      properties:
+        typescript:
+          title: Use TypeScript?
+          type: boolean
+          default: true
+          description: Enable TypeScript for better type safety?
+
+        testing_framework:
+          title: Testing Framework
+          type: string
+          description: Choose testing framework
+          default: jest
+          enum:
+            - jest
+            - vitest
+            - cypress
+            - playwright
+          enumNames:
+            - 'Jest (Unit/Integration)'
+            - 'Vitest (Fast Unit Tests)'
+            - 'Cypress (E2E)'
+            - 'Playwright (E2E)'
+
+        css_framework:
+          title: CSS Framework
+          type: string
+          description: Choose CSS/styling approach
+          default: material-ui
+          enum:
+            - material-ui
+            - tailwind
+            - bootstrap
+            - styled-components
+            - sass
+            - css-modules
+          enumNames:
+            - 'Material-UI (BA Standard)'
+            - 'Tailwind CSS'
+            - 'Bootstrap'
+            - 'Styled Components'
+            - 'Sass/SCSS'
+            - 'CSS Modules'
+
+        pwa_features:
+          title: Enable PWA Features?
+          type: boolean
+          default: false
+          description: Add Progressive Web App capabilities?
+
+        authentication:
+          title: Authentication Integration
+          type: string
+          description: User authentication method
+          default: azure-ad
+          enum:
+            - azure-ad
+            - auth0
+            - firebase
+            - custom
+            - none
+          enumNames:
+            - 'Azure AD (BA Standard)'
+            - 'Auth0'
+            - 'Firebase Auth'
+            - 'Custom Implementation'
+            - 'No Authentication'
+
+    - title: API Integration
+      properties:
+        api_endpoints:
+          title: API Endpoints to Connect
+          type: array
+          description: List APIs this frontend will consume
+          items:
+            type: string
+          ui:help: 'Enter API names or endpoints'
+
+        environment_specific_apis:
+          title: Environment-Specific API URLs?
+          type: boolean
+          default: true
+          description: Different API URLs per environment?
+
+        mock_data:
+          title: Generate Mock Data?
+          type: boolean
+          default: true
+          description: Create mock data for development?
+
+    - title: Multi-Environment Setup
+      properties:
+        deploy_environments:
+          title: Deploy to Environments
+          type: array
+          description: Select environments for deployment
+          items:
+            type: string
+            enum:
+              - PROD1
+              - SIT1
+              - DEV1
+              - PCM
+              - UAT1
+          uniqueItems: true
+          ui:widget: checkboxes
+          default: ['DEV1']
+
+        feature_flags:
+          title: Enable Feature Flags?
+          type: boolean
+          default: true
+          description: Add feature flag support for A/B testing?
+
+    - title: Repository Configuration
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+            allowedOwners:
+              - Portfolio-jaime
+            allowedRepos:
+              - 'ba-frontend-{{parameters.environment|lower}}'
+              - 'ba-{{parameters.environment|lower}}-frontend'
+            defaultOwner: Portfolio-jaime
+            defaultRepo: 'ba-frontend-{{parameters.environment|lower}}'
+
+  steps:
+    - id: fetch-base
+      name: Fetch Frontend Template
+      action: fetch:template
+      input:
+        url: ./frontend-skeleton
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          app_type: ${{ parameters.app_type }}
+          environment: ${{ parameters.environment }}
+          framework: ${{ parameters.framework }}
+          typescript: ${{ parameters.typescript }}
+          css_framework: ${{ parameters.css_framework }}
+          testing_framework: ${{ parameters.testing_framework }}
+          pwa_features: ${{ parameters.pwa_features }}
+          authentication: ${{ parameters.authentication }}
+          hosting_platform: ${{ parameters.hosting_platform }}
+
+    - id: setup-framework
+      name: Setup Frontend Framework
+      action: ba:setup-frontend-framework
+      input:
+        framework: ${{ parameters.framework }}
+        typescript: ${{ parameters.typescript }}
+        cssFramework: ${{ parameters.css_framework }}
+        testingFramework: ${{ parameters.testing_framework }}
+
+    - id: configure-environments
+      name: Configure Multi-Environment Setup
+      action: ba:configure-frontend-environments
+      input:
+        appName: ${{ parameters.name }}
+        primaryEnvironment: ${{ parameters.environment }}
+        deployEnvironments: ${{ parameters.deploy_environments }}
+        apiEndpoints: ${{ parameters.api_endpoints }}
+        environmentSpecificApis: ${{ parameters.environment_specific_apis }}
+
+    - id: setup-authentication
+      name: Setup Authentication
+      action: ba:setup-frontend-auth
+      input:
+        authMethod: ${{ parameters.authentication }}
+        environment: ${{ parameters.environment }}
+        appType: ${{ parameters.app_type }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: 'BA Frontend: ${{ parameters.description }}'
+        repoUrl: ${{ parameters.repoUrl }}
+        defaultBranch: main
+        gitCommitMessage: 'feat: create ${{ parameters.name }} frontend for ${{ parameters.environment }}'
+
+    - id: setup-deployment
+      name: Setup Deployment Pipeline
+      action: ba:setup-frontend-deployment
+      input:
+        repoUrl: ${{ steps.publish.output.repoContentsUrl }}
+        hostingPlatform: ${{ parameters.hosting_platform }}
+        deployEnvironments: ${{ parameters.deploy_environments }}
+        framework: ${{ parameters.framework }}
+
+    - id: register
+      name: Register in Backstage
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+    - id: create-docs
+      name: Create Documentation
+      action: ba:create-frontend-docs
+      input:
+        repoUrl: ${{ steps.publish.output.repoContentsUrl }}
+        appName: ${{ parameters.name }}
+        framework: ${{ parameters.framework }}
+        appType: ${{ parameters.app_type }}
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+        icon: github
+      - title: Open in Catalog
+        url: '/catalog/default/component/${{ parameters.name }}'
+        icon: catalog
+      - title: Development URL
+        url: 'https://${{ parameters.name }}-dev.ba.com'
+        icon: web
+        condition: ${{ 'DEV1' in parameters.deploy_environments }}
+      - title: Staging URL
+        url: 'https://${{ parameters.name }}-staging.ba.com'
+        icon: web
+        condition: ${{ 'SIT1' in parameters.deploy_environments }}
+      - title: Production URL
+        url: 'https://${{ parameters.name }}.ba.com'
+        icon: web
+        condition: ${{ 'PROD1' in parameters.deploy_environments }}
+      - title: CI/CD Pipeline
+        url: '${{ steps.publish.output.remoteUrl }}/actions'
+        icon: github
+      - title: Environment Dashboard
+        url: '/ba-dashboard?env=${{ parameters.environment }}&type=frontend'
+        icon: dashboard
+      - title: Documentation
+        url: '/docs/default/component/${{ parameters.name }}'
+        icon: docs

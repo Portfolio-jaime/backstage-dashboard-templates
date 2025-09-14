@@ -1,0 +1,275 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: ba-api-template
+  title: BA API Template
+  description: Create a new API with OpenAPI specification and environment deployment
+  tags:
+    - recommended
+    - ba
+    - api
+    - openapi
+spec:
+  owner: api-team
+  type: api
+
+  parameters:
+    - title: API Information
+      required:
+        - name
+        - description
+        - api_version
+      properties:
+        name:
+          title: API Name
+          type: string
+          description: Name of the API (e.g., flight-booking-api)
+          pattern: '^[a-z0-9-]+-api$'
+          ui:autofocus: true
+          ui:help: 'Must end with "-api" and use lowercase letters, numbers, and hyphens'
+        description:
+          title: Description
+          type: string
+          description: Brief description of what this API does
+        api_version:
+          title: API Version
+          type: string
+          description: Initial version of the API
+          default: 'v1'
+          pattern: '^v[0-9]+$'
+          ui:help: 'Format: v1, v2, etc.'
+
+    - title: Environment & Deployment
+      required:
+        - environment
+        - api_type
+      properties:
+        environment:
+          title: Primary Environment
+          type: string
+          description: Where will this API be primarily developed and tested?
+          default: DEV1
+          enum:
+            - PROD1
+            - SIT1
+            - DEV1
+            - PCM
+            - UAT1
+          enumNames:
+            - '🟢 PROD1 - Production (Live APIs)'
+            - '🟡 SIT1 - System Integration Testing'
+            - '🟠 DEV1 - Development Environment'
+            - '🔵 PCM - Pre-production Testing'
+            - '🟣 UAT1 - User Acceptance Testing'
+
+        api_type:
+          title: API Type
+          type: string
+          description: What type of API are you creating?
+          default: rest
+          enum:
+            - rest
+            - graphql
+            - grpc
+            - soap
+          enumNames:
+            - 'REST API (Recommended)'
+            - 'GraphQL API'
+            - 'gRPC API'
+            - 'SOAP API (Legacy)'
+
+        authentication:
+          title: Authentication Method
+          type: string
+          description: How will users authenticate with this API?
+          default: oauth2
+          enum:
+            - oauth2
+            - jwt
+            - api_key
+            - basic
+            - none
+          enumNames:
+            - 'OAuth 2.0 (Recommended)'
+            - 'JWT Token'
+            - 'API Key'
+            - 'Basic Authentication'
+            - 'No Authentication (Development Only)'
+
+    - title: Technical Specification
+      properties:
+        openapi_version:
+          title: OpenAPI Version
+          type: string
+          description: OpenAPI specification version
+          default: '3.0.3'
+          enum:
+            - '3.0.3'
+            - '3.1.0'
+          enumNames:
+            - 'OpenAPI 3.0.3 (Stable)'
+            - 'OpenAPI 3.1.0 (Latest)'
+
+        base_path:
+          title: Base Path
+          type: string
+          description: Base URL path for the API
+          default: '/api/v1'
+          pattern: '^/api/v[0-9]+$'
+          ui:help: 'Format: /api/v1, /api/v2, etc.'
+
+        include_examples:
+          title: Include Example Endpoints?
+          type: boolean
+          default: true
+          description: Generate sample endpoints (GET, POST, PUT, DELETE)?
+
+        rate_limiting:
+          title: Enable Rate Limiting?
+          type: boolean
+          default: true
+          description: Add rate limiting configuration?
+
+    - title: Environment Configuration
+      properties:
+        auto_deploy_environments:
+          title: Auto-Deploy to Environments
+          type: array
+          description: Select environments for automatic deployment
+          items:
+            type: string
+            enum:
+              - PROD1
+              - SIT1
+              - DEV1
+              - PCM
+              - UAT1
+          uniqueItems: true
+          ui:widget: checkboxes
+          default: ['DEV1']
+
+        database_integration:
+          title: Database Integration
+          type: boolean
+          default: false
+          description: Does this API need database access?
+
+        external_apis:
+          title: External API Dependencies
+          type: array
+          description: List external APIs this service will call
+          items:
+            type: string
+          ui:help: 'Enter external API names or URLs'
+
+    - title: Repository Configuration
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+            allowedOwners:
+              - Portfolio-jaime
+            allowedRepos:
+              - 'ba-apis-{{parameters.environment|lower}}'
+              - 'ba-{{parameters.environment|lower}}-apis'
+            defaultOwner: Portfolio-jaime
+            defaultRepo: 'ba-apis-{{parameters.environment|lower}}'
+
+  steps:
+    - id: fetch-base
+      name: Fetch API Base Template
+      action: fetch:template
+      input:
+        url: ./api-skeleton
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          api_version: ${{ parameters.api_version }}
+          environment: ${{ parameters.environment }}
+          api_type: ${{ parameters.api_type }}
+          authentication: ${{ parameters.authentication }}
+          openapi_version: ${{ parameters.openapi_version }}
+          base_path: ${{ parameters.base_path }}
+          include_examples: ${{ parameters.include_examples }}
+          rate_limiting: ${{ parameters.rate_limiting }}
+          database_integration: ${{ parameters.database_integration }}
+          external_apis: ${{ parameters.external_apis }}
+
+    - id: generate-openapi
+      name: Generate OpenAPI Specification
+      action: ba:generate-openapi
+      input:
+        apiName: ${{ parameters.name }}
+        apiVersion: ${{ parameters.api_version }}
+        apiType: ${{ parameters.api_type }}
+        basePath: ${{ parameters.base_path }}
+        includeExamples: ${{ parameters.include_examples }}
+
+    - id: setup-multi-environment
+      name: Setup Multi-Environment Configuration
+      action: ba:setup-api-environments
+      input:
+        apiName: ${{ parameters.name }}
+        primaryEnvironment: ${{ parameters.environment }}
+        autoDeployEnvironments: ${{ parameters.auto_deploy_environments }}
+
+    - id: publish
+      name: Publish API to GitHub
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: 'BA API: ${{ parameters.description }}'
+        repoUrl: ${{ parameters.repoUrl }}
+        defaultBranch: main
+        gitCommitMessage: 'feat: create ${{ parameters.name }} for ${{ parameters.environment }} environment'
+
+    - id: register-api
+      name: Register API in Backstage
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+    - id: setup-api-gateway
+      name: Configure API Gateway
+      action: ba:setup-api-gateway
+      input:
+        apiName: ${{ parameters.name }}
+        environment: ${{ parameters.environment }}
+        basePath: ${{ parameters.base_path }}
+        authentication: ${{ parameters.authentication }}
+
+    - id: create-api-docs
+      name: Generate API Documentation
+      action: ba:create-api-docs
+      input:
+        repoUrl: ${{ steps.publish.output.repoContentsUrl }}
+        apiName: ${{ parameters.name }}
+        openApiSpec: ${{ steps.generate-openapi.output.specPath }}
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+        icon: github
+      - title: View API in Catalog
+        url: '/catalog/default/api/${{ parameters.name }}'
+        icon: catalog
+      - title: API Documentation
+        url: '/api-docs/${{ parameters.name }}'
+        icon: docs
+      - title: OpenAPI Spec
+        url: '${{ steps.publish.output.remoteUrl }}/blob/main/openapi.yaml'
+        icon: code
+      - title: Environment Dashboard
+        url: '/ba-dashboard?env=${{ parameters.environment }}&type=api'
+        icon: dashboard
+      - title: API Gateway Config
+        url: '/catalog/default/resource/api-gateway-${{ parameters.environment|lower }}'
+        icon: cloud

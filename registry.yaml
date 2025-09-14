@@ -79,3 +79,88 @@ templates:
       - developer
       - tools
       - productivity
+
+  # Environment-specific dashboards
+  - id: ba-prod1
+    name: PROD1 Environment
+    description: Production environment monitoring and metrics
+    category: Environments
+    configPath: templates/ba-prod1-dashboard/config.yaml
+    icon: "🟢"
+    target: environment
+    environment: PROD1
+    tags:
+      - production
+      - environment
+      - monitoring
+      - live
+
+  - id: ba-sit1
+    name: SIT1 Environment
+    description: System Integration Testing environment
+    category: Environments
+    configPath: templates/ba-sit1-dashboard/config.yaml
+    icon: "🟡"
+    target: environment
+    environment: SIT1
+    tags:
+      - testing
+      - integration
+      - environment
+      - staging
+
+  - id: ba-dev1
+    name: DEV1 Environment
+    description: Development environment for feature testing
+    category: Environments
+    configPath: templates/ba-dev1-dashboard/config.yaml
+    icon: "🟠"
+    target: environment
+    environment: DEV1
+    tags:
+      - development
+      - environment
+      - testing
+      - features
+
+  - id: ba-pcm
+    name: PCM Environment
+    description: Pre-production compatibility testing
+    category: Environments
+    configPath: templates/ba-pcm-dashboard/config.yaml
+    icon: "🔵"
+    target: environment
+    environment: PCM
+    tags:
+      - preproduction
+      - compatibility
+      - environment
+      - validation
+
+  - id: ba-uat1
+    name: UAT1 Environment
+    description: User Acceptance Testing environment
+    category: Environments
+    configPath: templates/ba-uat1-dashboard/config.yaml
+    icon: "🟣"
+    target: environment
+    environment: UAT1
+    tags:
+      - uat
+      - acceptance
+      - environment
+      - user-testing
+
+  # Documentation dashboard
+  - id: ba-techdocs
+    name: TechDocs Dashboard
+    description: Documentation hub and writing analytics
+    category: Documentation
+    configPath: templates/ba-techdocs-dashboard/config.yaml
+    icon: "📚"
+    target: documentation
+    tags:
+      - documentation
+      - techdocs
+      - writing
+      - knowledge
