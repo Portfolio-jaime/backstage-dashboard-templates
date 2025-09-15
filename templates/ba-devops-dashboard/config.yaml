@@ -29,14 +29,20 @@ spec:
         role: "Senior DevOps Engineer"
         email: "jaime.henao@ba.com"
         expertise: ["Kubernetes", "Terraform", "CI/CD", "Monitoring"]
+        status: "online"
+        timezone: "COT (UTC-5)"
       - name: "DevOps Engineer 1"
         role: "DevOps Engineer"
         email: "devops1@ba.com"
         expertise: ["Docker", "Jenkins", "AWS", "GitOps"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
       - name: "DevOps Engineer 2"
         role: "Cloud Engineer"
         email: "devops2@ba.com"
         expertise: ["Azure", "Infrastructure", "Security", "Automation"]
+        status: "away"
+        timezone: "EST (UTC-5)"
     responsibilities:
       - "CI/CD pipeline management"
       - "Infrastructure as Code (Terraform)"
@@ -52,10 +58,30 @@ spec:
       - "Docker"
       - "Helm"
     metrics:
-      deploymentFrequency: "Multiple times per day"
-      leadTime: "< 1 hour"
-      mttr: "< 30 minutes"
-      changeFailureRate: "< 5%"
+      deploymentFrequency:
+        value: "3-5 times per day"
+        target: "Multiple daily"
+        trend: "up"
+        percentage: 85
+        status: "excellent"
+      leadTime:
+        value: "45 minutes"
+        target: "< 1 hour"
+        trend: "stable"
+        percentage: 92
+        status: "excellent"
+      mttr:
+        value: "18 minutes"
+        target: "< 30 minutes"
+        trend: "down"
+        percentage: 95
+        status: "excellent"
+      changeFailureRate:
+        value: "2.3%"
+        target: "< 5%"
+        trend: "down"
+        percentage: 88
+        status: "good"
     slackChannel: "#devops-team"
     confluence: "https://ba.atlassian.net/wiki/spaces/DEVOPS"
     oncallRotation:
@@ -63,6 +89,50 @@ spec:
       schedule: "Weekly rotation"
 
   widgets:
+    # 🔥 Deployment Pipeline Status
+    deploymentPipelines:
+      enabled: true
+      sources: ["GitHub Actions", "Jenkins"]
+      environments: ["DEV", "STG", "PROD"]
+      showLastDeployments: 5
+      refreshInterval: 120000 # 2 minutes
+
+    # 📊 Infrastructure Health
+    infrastructureHealth:
+      enabled: true
+      sources: ["Kubernetes", "AWS/Azure", "Monitoring"]
+      showMetrics:
+        - clusterStatus
+        - nodeHealth
+        - podStatus
+        - resourceUtilization
+      refreshInterval: 180000 # 3 minutes
+
+    # 🔄 Environment Status Board
+    environmentStatus:
+      enabled: true
+      environments:
+        - name: "PROD1"
+          status: "healthy"
+          lastDeploy: "2 hours ago"
+        - name: "STG1"
+          status: "deploying"
+          lastDeploy: "deploying now"
+        - name: "DEV1"
+          status: "healthy"
+          lastDeploy: "30 minutes ago"
+        - name: "UAT1"
+          status: "warning"
+          lastDeploy: "6 hours ago"
+      refreshInterval: 120000 # 2 minutes
+
+    # 📋 Software Templates
+    softwareTemplates:
+      enabled: true
+      showStats: true
+      maxTemplates: 10
+      refreshInterval: 300000 # 5 minutes
+
     github:
       enabled: true
       refreshInterval: 300000 # 5 minutes
