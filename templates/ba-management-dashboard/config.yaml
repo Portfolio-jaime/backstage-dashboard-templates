@@ -14,6 +14,81 @@ metadata:
     backstage.io/last-updated: "2025-01-15T10:30:00Z"
 
 spec:
+  # Team-specific information
+  team:
+    name: executive-team
+    displayName: "Executive Leadership Team"
+    description: "Strategic leadership and business oversight for BA digital operations and transformation initiatives"
+    lead: "ceo@ba.com"
+    members:
+      - name: "Victoria Ashworth"
+        role: "Chief Technology Officer"
+        email: "victoria.ashworth@ba.com"
+        expertise: ["Technology Strategy", "Digital Transformation", "Innovation", "Leadership"]
+        status: "away"
+        timezone: "GMT (UTC+0)"
+      - name: "Robert Campbell"
+        role: "Chief Digital Officer"
+        email: "robert.campbell@ba.com"
+        expertise: ["Digital Strategy", "Customer Experience", "Data Analytics", "Business Intelligence"]
+        status: "busy"
+        timezone: "GMT (UTC+0)"
+      - name: "Elena Kostas"
+        role: "VP Engineering"
+        email: "elena.kostas@ba.com"
+        expertise: ["Engineering Leadership", "Product Strategy", "Team Management", "Technical Excellence"]
+        status: "online"
+        timezone: "EET (UTC+2)"
+      - name: "Thomas Anderson"
+        role: "Head of Digital Innovation"
+        email: "thomas.anderson@ba.com"
+        expertise: ["Innovation Strategy", "Emerging Technologies", "R&D", "Strategic Planning"]
+        status: "online"
+        timezone: "PST (UTC-8)"
+    responsibilities:
+      - "Strategic technology planning and roadmap development"
+      - "Digital transformation leadership and oversight"
+      - "Business metrics monitoring and performance analysis"
+      - "Innovation strategy and emerging technology adoption"
+      - "Cross-functional team leadership and coordination"
+      - "Stakeholder management and executive reporting"
+    tools:
+      - "Business Intelligence Platforms"
+      - "Strategic Analytics Tools"
+      - "Executive Reporting Systems"
+      - "Performance Management Tools"
+      - "Innovation Management Platforms"
+      - "Strategic Planning Software"
+    metrics:
+      digitalTransformationProgress:
+        value: "82% complete"
+        target: "> 80%"
+        trend: "up"
+        percentage: 82
+        status: "excellent"
+      customerSatisfaction:
+        value: "4.3/5.0"
+        target: "> 4.0"
+        trend: "stable"
+        percentage: 86
+        status: "excellent"
+      businessValue:
+        value: "£15.2M delivered"
+        target: "£12M target"
+        trend: "up"
+        percentage: 127
+        status: "excellent"
+      teamEngagement:
+        value: "88% satisfaction"
+        target: "> 85%"
+        trend: "up"
+        percentage: 88
+        status: "excellent"
+    slackChannel: "#executive-team"
+    confluence: "https://ba.atlassian.net/wiki/spaces/EXECUTIVE"
+    oncallRotation:
+      current: "elena.kostas@ba.com"
+      schedule: "Executive on-call coverage"
   widgets:
     github:
       enabled: true

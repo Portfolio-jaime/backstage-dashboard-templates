@@ -8,6 +8,81 @@ metadata:
   author: "British Airways Digital Operations"
   
 spec:
+  # Team-specific information
+  team:
+    name: operations-team
+    displayName: "BA Digital Operations Team"
+    description: "Central operations and coordination team for British Airways digital operations and technology infrastructure"
+    lead: "operations.lead@ba.com"
+    members:
+      - name: "Michael Brown"
+        role: "Head of Digital Operations"
+        email: "michael.brown@ba.com"
+        expertise: ["Operations Management", "Strategy", "Digital Transformation", "Leadership"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
+      - name: "Lisa Chen"
+        role: "Operations Manager"
+        email: "lisa.chen@ba.com"
+        expertise: ["Process Optimization", "Coordination", "Project Management", "Analytics"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
+      - name: "Ahmed Al-Rashid"
+        role: "Technical Operations Specialist"
+        email: "ahmed.alrashid@ba.com"
+        expertise: ["Technical Support", "System Integration", "Monitoring", "Troubleshooting"]
+        status: "online"
+        timezone: "GST (UTC+4)"
+      - name: "Sophie Martin"
+        role: "Digital Strategy Analyst"
+        email: "sophie.martin@ba.com"
+        expertise: ["Strategic Planning", "Business Analysis", "Digital Innovation", "Reporting"]
+        status: "away"
+        timezone: "CET (UTC+1)"
+    responsibilities:
+      - "Overall digital operations oversight and coordination"
+      - "Cross-team communication and collaboration"
+      - "Strategic planning and digital transformation"
+      - "Performance monitoring and reporting"
+      - "Incident coordination and escalation"
+      - "Process improvement and optimization"
+    tools:
+      - "Backstage Developer Portal"
+      - "Monitoring and Alerting Tools"
+      - "Communication Platforms"
+      - "Project Management Tools"
+      - "Analytics and Reporting Systems"
+      - "Collaboration Platforms"
+    metrics:
+      operationalEfficiency:
+        value: "94.2%"
+        target: "> 90%"
+        trend: "up"
+        percentage: 94
+        status: "excellent"
+      crossTeamCollaboration:
+        value: "89% satisfaction"
+        target: "> 85%"
+        trend: "stable"
+        percentage: 89
+        status: "good"
+      incidentResponse:
+        value: "12 minutes avg"
+        target: "< 15 minutes"
+        trend: "down"
+        percentage: 92
+        status: "excellent"
+      digitalTransformation:
+        value: "78% milestones met"
+        target: "> 75%"
+        trend: "up"
+        percentage: 78
+        status: "good"
+    slackChannel: "#digital-operations"
+    confluence: "https://ba.atlassian.net/wiki/spaces/DIGITALOPS"
+    oncallRotation:
+      current: "lisa.chen@ba.com"
+      schedule: "Business hours coverage"
   widgets:
     # Disable all service widgets for clean main dashboard
     catalog:

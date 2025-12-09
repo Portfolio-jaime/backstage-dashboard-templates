@@ -10,6 +10,83 @@ metadata:
   author: "British Airways Developer Experience Team"
 
 spec:
+  # Team-specific information
+  team:
+    name: development-team
+    displayName: "Developer Experience Team"
+    description: "Software developers and engineers building and maintaining BA's digital services and developer platform"
+    lead: "dev.lead@ba.com"
+    members:
+      - name: "Emma Johnson"
+        role: "Lead Frontend Developer"
+        email: "emma.johnson@ba.com"
+        expertise: ["React", "TypeScript", "Next.js", "UI/UX"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
+      - name: "Carlos Silva"
+        role: "Senior Backend Developer"
+        email: "carlos.silva@ba.com"
+        expertise: ["Node.js", "Python", "APIs", "Microservices"]
+        status: "online"
+        timezone: "CET (UTC+1)"
+      - name: "Priya Patel"
+        role: "Full Stack Developer"
+        email: "priya.patel@ba.com"
+        expertise: ["React", "Node.js", "TypeScript", "GraphQL"]
+        status: "online"
+        timezone: "IST (UTC+5:30)"
+      - name: "James Wilson"
+        role: "Developer Experience Engineer"
+        email: "james.wilson@ba.com"
+        expertise: ["Developer Tools", "CI/CD", "Backstage", "Platform Engineering"]
+        status: "away"
+        timezone: "GMT (UTC+0)"
+    responsibilities:
+      - "Application development and feature implementation"
+      - "API design and development"
+      - "Code quality assurance and testing"
+      - "Developer tooling and experience improvement"
+      - "Technical documentation and knowledge sharing"
+      - "Performance optimization and monitoring"
+    tools:
+      - "React"
+      - "Node.js"
+      - "TypeScript"
+      - "Jest"
+      - "GitHub"
+      - "VS Code"
+      - "Docker"
+      - "Backstage"
+    metrics:
+      codeQuality:
+        value: "A grade"
+        target: "A+ grade"
+        trend: "up"
+        percentage: 88
+        status: "good"
+      testCoverage:
+        value: "87%"
+        target: "> 80%"
+        trend: "stable"
+        percentage: 87
+        status: "excellent"
+      deploymentSuccess:
+        value: "96.5%"
+        target: "> 95%"
+        trend: "stable"
+        percentage: 97
+        status: "excellent"
+      developerVelocity:
+        value: "42 story points/sprint"
+        target: "> 35 points/sprint"
+        trend: "up"
+        percentage: 91
+        status: "excellent"
+    slackChannel: "#developer-experience"
+    confluence: "https://ba.atlassian.net/wiki/spaces/DEVEXP"
+    oncallRotation:
+      current: "emma.johnson@ba.com"
+      schedule: "Weekly support rotation"
   widgets:
     github:
       enabled: true

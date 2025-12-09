@@ -14,6 +14,81 @@ metadata:
     backstage.io/last-updated: "2025-01-15T10:30:00Z"
 
 spec:
+  # Team-specific information
+  team:
+    name: security-team
+    displayName: "Security Operations Team"
+    description: "Responsible for security monitoring, threat detection, compliance, and cybersecurity operations"
+    lead: "security.lead@ba.com"
+    members:
+      - name: "Alex Thompson"
+        role: "Chief Information Security Officer"
+        email: "alex.thompson@ba.com"
+        expertise: ["Cybersecurity", "Risk Management", "Compliance", "Leadership"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
+      - name: "Rachel Kim"
+        role: "Security Engineer"
+        email: "rachel.kim@ba.com"
+        expertise: ["Threat Detection", "SIEM", "Incident Response", "Forensics"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
+      - name: "Mohammed Hassan"
+        role: "Compliance Specialist"
+        email: "mohammed.hassan@ba.com"
+        expertise: ["GDPR", "ISO 27001", "Audit", "Risk Assessment"]
+        status: "busy"
+        timezone: "GMT (UTC+0)"
+      - name: "Jennifer Walsh"
+        role: "Penetration Tester"
+        email: "jennifer.walsh@ba.com"
+        expertise: ["Ethical Hacking", "Vulnerability Assessment", "Red Team", "Security Testing"]
+        status: "online"
+        timezone: "EST (UTC-5)"
+    responsibilities:
+      - "Security monitoring and threat detection"
+      - "Incident response and forensics"
+      - "Compliance auditing and risk assessment"
+      - "Vulnerability management and penetration testing"
+      - "Security awareness and training"
+      - "Security policy development and enforcement"
+    tools:
+      - "Security Information and Event Management (SIEM)"
+      - "Vulnerability Scanners"
+      - "Compliance Audit Tools"
+      - "Incident Response Platforms"
+      - "Threat Intelligence Tools"
+      - "Identity and Access Management (IAM)"
+    metrics:
+      securityIncidents:
+        value: "2 critical/month"
+        target: "< 5 critical/month"
+        trend: "down"
+        percentage: 95
+        status: "excellent"
+      complianceScore:
+        value: "98.5%"
+        target: "> 95%"
+        trend: "stable"
+        percentage: 98
+        status: "excellent"
+      vulnerabilityResolution:
+        value: "3.2 days avg"
+        target: "< 5 days"
+        trend: "down"
+        percentage: 89
+        status: "good"
+      securityTraining:
+        value: "94% completion"
+        target: "> 90%"
+        trend: "up"
+        percentage: 94
+        status: "excellent"
+    slackChannel: "#security-ops"
+    confluence: "https://ba.atlassian.net/wiki/spaces/SECURITY"
+    oncallRotation:
+      current: "rachel.kim@ba.com"
+      schedule: "24/7 SOC rotation"
   widgets:
     github:
       enabled: true

@@ -13,6 +13,77 @@ metadata:
     backstage.io/last-updated: "2025-01-15T10:30:00Z"
   
 spec:
+  # Team-specific information
+  team:
+    name: platform-team
+    displayName: "Platform Engineering Team"
+    description: "Responsible for infrastructure, platform architecture, and system reliability engineering"
+    lead: "platform.lead@ba.com"
+    members:
+      - name: "Sarah Mitchell"
+        role: "Senior Platform Architect"
+        email: "sarah.mitchell@ba.com"
+        expertise: ["Kubernetes", "Cloud Architecture", "Infrastructure", "Monitoring"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
+      - name: "David Chen"
+        role: "Infrastructure Engineer"
+        email: "david.chen@ba.com"
+        expertise: ["Terraform", "AWS", "Networking", "Security"]
+        status: "online"
+        timezone: "GMT (UTC+0)"
+      - name: "Maria Rodriguez"
+        role: "Site Reliability Engineer"
+        email: "maria.rodriguez@ba.com"
+        expertise: ["Prometheus", "Grafana", "Incident Response", "Automation"]
+        status: "away"
+        timezone: "CET (UTC+1)"
+    responsibilities:
+      - "Infrastructure architecture and design"
+      - "Platform scalability and performance"
+      - "System reliability and availability"
+      - "Performance optimization and monitoring"
+      - "Disaster recovery and backup strategies"
+      - "Cloud infrastructure management"
+    tools:
+      - "Kubernetes"
+      - "Terraform"
+      - "Prometheus"
+      - "Grafana"
+      - "Helm"
+      - "Istio"
+      - "ArgoCD"
+      - "Vault"
+    metrics:
+      platformAvailability:
+        value: "99.97%"
+        target: "> 99.95%"
+        trend: "stable"
+        percentage: 99
+        status: "excellent"
+      infrastructureCost:
+        value: "€1.2M/month"
+        target: "< €1.5M/month"
+        trend: "down"
+        percentage: 80
+        status: "good"
+      resourceUtilization:
+        value: "78%"
+        target: "70-85%"
+        trend: "stable"
+        percentage: 85
+        status: "excellent"
+      incidentResolution:
+        value: "23 minutes"
+        target: "< 30 minutes"
+        trend: "down"
+        percentage: 92
+        status: "excellent"
+    slackChannel: "#platform-engineering"
+    confluence: "https://ba.atlassian.net/wiki/spaces/PLATFORM"
+    oncallRotation:
+      current: "sarah.mitchell@ba.com"
+      schedule: "Weekly rotation"
   widgets:
     # Core platform monitoring
     systemHealth:
